@@ -10,8 +10,17 @@ public class Account{
      private Long id;
     private String userName;
     private String password;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Person getPerson() {
         return person;
