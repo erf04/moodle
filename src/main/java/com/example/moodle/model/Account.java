@@ -2,6 +2,8 @@ package com.example.moodle.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "accounts")
 public class Account{
@@ -13,6 +15,9 @@ public class Account{
     @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
     private String email;
+
+    @ManyToMany(mappedBy = "participants")
+    private List<CoursePlan> attendedCoursePlans;
 
     public String getEmail() {
         return email;

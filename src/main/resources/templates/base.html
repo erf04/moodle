@@ -198,8 +198,8 @@
             <!--Image Avatar-->
             <div class="avatar text-center">
                 <img src="assets/img/client-img4.png" alt="" class="rounded-circle" />
-                <p><strong>Jonathan Clarke</strong></p>
-                <span class="text-primary small"><strong>UI/UX Designer</strong></span>
+                <p><strong th:text="${user.userName}"></strong></p>
+                <span class="text-primary small"><strong th:text="${param.get("admin")}"></strong></span>
             </div>
             <!--Image Avatar-->
 
