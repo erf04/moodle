@@ -16,6 +16,22 @@ public class Account{
     private Person person;
     private String email;
 
+    public List<CoursePlan> getAttendedCoursePlans() {
+        return attendedCoursePlans;
+    }
+
+    public void setAttendedCoursePlans(List<CoursePlan> attendedCoursePlans) {
+        this.attendedCoursePlans = attendedCoursePlans;
+    }
+
+    public List<Exam> getAttendedExams() {
+        return attendedExams;
+    }
+
+    public void setAttendedExams(List<Exam> attendedExams) {
+        this.attendedExams = attendedExams;
+    }
+
     @ManyToMany(mappedBy = "participants")
     private List<CoursePlan> attendedCoursePlans;
 
