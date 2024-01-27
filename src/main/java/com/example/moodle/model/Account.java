@@ -19,6 +19,10 @@ public class Account{
     @ManyToMany(mappedBy = "participants")
     private List<CoursePlan> attendedCoursePlans;
 
+    @ManyToMany (mappedBy = "participants")
+    private List<Exam> attendedExams;
+
+
     public String getEmail() {
         return email;
     }

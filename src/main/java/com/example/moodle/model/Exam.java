@@ -23,6 +23,22 @@ public class Exam {
     @ManyToOne
     private Teacher creator;
 
+    @ManyToMany
+    @JoinTable(
+            name = "exam_participant",
+            joinColumns = @JoinColumn(name = "exam_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id")
+    )
+    private List<Account> participants;
+
+    public List<Account> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Account> participants) {
+        this.participants = participants;
+    }
+
     public Long getId() {
         return id;
     }

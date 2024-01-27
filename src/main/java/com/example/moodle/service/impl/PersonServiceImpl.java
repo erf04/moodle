@@ -1,7 +1,8 @@
-package com.example.moodle.service;
+package com.example.moodle.service.impl;
 
 import com.example.moodle.model.Person;
 import com.example.moodle.repository.PersonRepository;
+import com.example.moodle.service.PersonService;
 import jakarta.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonRepository personRepository;

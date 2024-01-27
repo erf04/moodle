@@ -14,7 +14,7 @@ public class Question {
     private Long id;
 
     private String text;
-    @ManyToMany
+    @ManyToMany(mappedBy = "questions")
     private List<Exam> exams;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "question")

@@ -1,8 +1,9 @@
-package com.example.moodle.service;
+package com.example.moodle.service.impl;
 
 import com.example.moodle.model.Account;
 import com.example.moodle.model.Person;
 import com.example.moodle.repository.AccountRepository;
+import com.example.moodle.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
     @Override
