@@ -32,7 +32,6 @@ public class AuthController {
                                BindingResult result,
                                Model model){
         Account existingAccount= accountService.findByEmail(account.getEmail());
-
         if(existingAccount != null && existingAccount.getEmail() != null && !existingAccount.getEmail().isEmpty()){
             return "redirect:/register?fail";
         }
@@ -61,13 +60,12 @@ public class AuthController {
         if (findingAccount==null){
             return "redirect:/login?fail";
         }
-
         return "redirect:/home/"+findingAccount.getId();
     }
 
     @GetMapping("/home/{user_id}")
     public String home(@PathVariable Long user_id,Model model){
         model.addAttribute("user",accountService.findByID(user_id));
-        return "hello";
+        return "userhome";
     }
 }

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:extends="base.html">
+<head>
+    <title th:fragment="title">Specific Page Title</title>
+    <!-- Add specific page CSS and JS files here if needed -->
+</head>
+<body>
+
+<div th:replace="~{base :: csslinks}"></div>
+<div th:replace="~{base :: navbar}"></div>
+<div class="row main-content">
+    <div th:replace="~{base::leftsidebar}"></div>
+    <!--Content right-->
+        <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+            <h5 class="mb-0" ><strong>Accordion</strong></h5>
+            <span class="text-secondary">Dashboard <i class="fa fa-angle-right"></i> accordion</span>
+
+            <div class="row mt-3">
+                <div class="col-sm-6">
+                    <!--Accordion group style 1-->
+                    <div class="mt-1 mb-3 p-2 button-container">
+                        <h6>Accordion group style 1</h6>
+                        <div class="accordion" id="accordionExample">
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingOne">
+                                    <h5 class="mb-0 panel-title">
+                                        <button class="btn btn-link accordion-btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Collapsible Group Item #1
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingTwo">
+                                    <h5 class="mb-0 panel-title">
+                                        <button class="btn btn-link accordion-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Collapsible Group Item #2
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingThree">
+                                    <h5 class="mb-0 panel-title">
+                                        <button class="btn btn-link accordion-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Collapsible Group Item #3
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Accordion group style 1-->
+
+                    <!--Accordion group style 2-->
+                    <div class="mt-1 mb-3 p-2 button-container">
+                        <h6>Accordion group style 2</h6>
+                        <div class="accordion" id="accordionExample2">
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingOne2">
+                                    <h5 class="mb-0 panel-title-2">
+                                        <button class="btn btn-link accordion-btn" type="button" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">
+                                            Collapsible Group Item #1
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseOne2" class="collapse show" aria-labelledby="headingOne2" data-parent="#accordionExample2">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingTwo2">
+                                    <h5 class="mb-0 panel-title-2">
+                                        <button class="btn btn-link accordion-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                            Collapsible Group Item #2
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingThree2">
+                                    <h5 class="mb-0 panel-title-2">
+                                        <button class="btn btn-link accordion-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree2" aria-expanded="false" aria-controls="collapseThree2">
+                                            Collapsible Group Item #3
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree2" class="collapse" aria-labelledby="headingThree2" data-parent="#accordionExample2">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Accordion group style 2-->
+
+                </div>
+
+
+                <div class="col-sm-6">
+                    <!--Basic accordion-->
+                    <div class="mt-1 mb-3 p-2 button-container">
+                        <h6>Basic accordion with button and link</h6>
+                        <p>
+                            <a class="btn btn-theme btn-round text-white" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Link with href
+                            </a>
+                            <button class="btn btn-outline-theme btn-round" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Button with data-target
+                            </button>
+                        </p>
+                        <div class="collapse show shadow" id="collapseExample">
+                            <div class="card card-body">
+                                <p class="text-justify">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Basic accordion-->
+
+                    <!--Accordion group style 3-->
+                    <div class="mt-1 mb-3 p-2 button-container">
+                        <h6>Accordion group style 3</h6>
+                        <div class="accordion" id="accordionExample3">
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingOne3">
+                                    <h5 class="mb-0 panel-title-3">
+                                        <button class="btn btn-link accordion-btn" type="button" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne3">
+                                            Collapsible Group Item #1
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseOne3" class="collapse show" aria-labelledby="headingOne3" data-parent="#accordionExample3">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingTwo3">
+                                    <h5 class="mb-0 panel-title-3">
+                                        <button class="btn btn-link accordion-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo3" aria-expanded="false" aria-controls="collapseTwo3">
+                                            Collapsible Group Item #2
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo3" class="collapse" aria-labelledby="headingTwo3" data-parent="#accordionExample3">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow">
+                                <div class="card-header accordion-header p-1" id="headingThree3">
+                                    <h5 class="mb-0 panel-title-3">
+                                        <button class="btn btn-link accordion-btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+                                            Collapsible Group Item #3
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree3" class="collapse" aria-labelledby="headingThree3" data-parent="#accordionExample3">
+                                    <div class="card-body p-3 text-justify accordion-body">
+                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/Accordion group style 3-->
+
+                </div>
+            </div>
+
+            <div class="mt-3 mb-2">
+                <div class="mt-1 mb-3 p-2 button-container">
+                    <h6>Multiple targets</h6>
+                    <p>
+                        <a class="btn btn-theme btn-round text-white" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
+                        <button class="btn btn-outline-theme btn-round" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
+                        <button class="btn btn-theme btn-round" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse show multi-collapse shadow" id="multiCollapseExample1">
+                                <div class="card card-body accordion-body">
+                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="collapse show multi-collapse shadow" id="multiCollapseExample2">
+                                <div class="card card-body accordion-body">
+                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/Multiple targets-->
+            </div>
+    </div>
+</div>
+
+<div th:replace="~{base :: footer}"></div>
+
+<!--Page Wrapper-->
+
+<!-- Page JavaScript Files-->
+<div th:replace="~{base :: jslinks}"></div>
+</body>
+</html>
