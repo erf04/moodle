@@ -75,7 +75,7 @@
                     <a href="#">Exams</a>
                     <div  th:each="courseExam : ${course.getExams()}">
                         <p th:text="${courseExam.getTitle()}"></p>
-                        <p>th:text ="${courseExam.get}"</p>
+                        <p>th:text ="${courseExam.getExamTime()}"</p>
                     </div>
                 </div>
             </div>
