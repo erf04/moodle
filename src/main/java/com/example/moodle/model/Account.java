@@ -24,19 +24,31 @@ public class Account{
         this.attendedCoursePlans = attendedCoursePlans;
     }
 
-    public List<Exam> getAttendedExams() {
-        return attendedExams;
-    }
-
-    public void setAttendedExams(List<Exam> attendedExams) {
-        this.attendedExams = attendedExams;
-    }
-
     @ManyToMany(mappedBy = "participants")
     private List<CoursePlan> attendedCoursePlans;
 
-    @ManyToMany (mappedBy = "participants")
-    private List<Exam> attendedExams;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "account")
+    private List<ExamPlan> examPlans;
+
+    public List<ExamPlan> getExamPlans() {
+        return examPlans;
+    }
+
+    public void setExamPlans(List<ExamPlan> examPlans) {
+        this.examPlans = examPlans;
+    }
+
+    public List<SubmittedAnswer> getSubmittedAnswers() {
+        return submittedAnswers;
+    }
+
+    public void setSubmittedAnswers(List<SubmittedAnswer> submittedAnswers) {
+        this.submittedAnswers = submittedAnswers;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "submitter")
+    private List<SubmittedAnswer> submittedAnswers;
+
 
 
     public String getEmail() {

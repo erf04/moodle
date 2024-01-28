@@ -23,20 +23,15 @@ public class Exam {
     @ManyToOne
     private Teacher creator;
 
-    @ManyToMany
-    @JoinTable(
-            name = "exam_participant",
-            joinColumns = @JoinColumn(name = "exam_id"),
-            inverseJoinColumns = @JoinColumn(name = "account_id")
-    )
-    private List<Account> participants;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "exam")
+    private List<ExamPlan> examPlans;
 
-    public List<Account> getParticipants() {
-        return participants;
+    public List<ExamPlan> getExamPlans() {
+        return examPlans;
     }
 
-    public void setParticipants(List<Account> participants) {
-        this.participants = participants;
+    public void setExamPlans(List<ExamPlan> examPlans) {
+        this.examPlans = examPlans;
     }
 
     public Long getId() {
