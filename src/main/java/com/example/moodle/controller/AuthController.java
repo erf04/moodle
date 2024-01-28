@@ -3,6 +3,7 @@ package com.example.moodle.controller;
 import com.example.moodle.model.Account;
 import com.example.moodle.model.Person;
 import com.example.moodle.service.AccountService;
+import com.example.moodle.service.CoursePlanService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,12 +13,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class AuthController {
 
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private CoursePlanService coursePlanService;
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         Account account =new Account();
@@ -65,6 +70,8 @@ public class AuthController {
 
     @GetMapping("/home/{user_id}")
     public String home(@PathVariable Long user_id,Model model){
+        Account account=accountService.findByID(user_id);
+        System.out.println(coursePlanService.findCoursePlanByParticipants(List.of(account)).isEmpty());
         model.addAttribute("user",accountService.findByID(user_id));
         return "userhome";
     }

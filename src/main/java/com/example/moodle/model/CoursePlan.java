@@ -32,7 +32,6 @@ public class CoursePlan {
             inverseJoinColumns = @JoinColumn(name = "coursePlan_id")
     )
     private List<Account> participants;
-
     public List<Account> getParticipants() {
         return participants;
     }

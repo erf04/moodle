@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "teachers")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Teacher extends Account{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
 

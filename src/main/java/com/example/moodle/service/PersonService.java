@@ -7,8 +7,9 @@ import java.util.List;
 
 @Service
 public interface PersonService {
-    List<Person> findAllPersons();
-    Person findById(Long id);
-    List<Person> findByFirstName(String firstname);
+    public List<Person> findAllPersons();
+    public Person findById(Long id);
+    public List<Person> findByFirstName(String firstname);
+    public Person save(Person person);
 
 }

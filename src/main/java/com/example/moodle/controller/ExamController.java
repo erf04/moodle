@@ -2,9 +2,11 @@ package com.example.moodle.controller;
 
 import com.example.moodle.model.*;
 import com.example.moodle.repository.CoursePlanRepository;
+import com.example.moodle.repository.PersonRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CourseService;
 import com.example.moodle.service.ExamService;
+import com.example.moodle.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,15 +31,15 @@ public class ExamController {
 
     @Autowired
     private ExamService examService;
+
+    @Autowired
+    private PersonRepository personService;
     @GetMapping("/add")
     public String addCourse(){
         Teacher teacher=new Teacher();
         teacher.setUserName("teacher");
         teacher.setPassword("0000");
-        Person person=new Person();
-        person.setFirstName("ali");
-        person.setLastName("alipoor");
-        teacher.setPerson(person);
+        teacher.setPerson(personService.getReferenceById(1L));
         accountService.save(teacher);
         Exam exam=new Exam();
         Question question=new Question();
