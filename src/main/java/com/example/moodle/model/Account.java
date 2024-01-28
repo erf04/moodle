@@ -27,7 +27,7 @@ public class Account{
     @ManyToMany(mappedBy = "participants")
     private List<CoursePlan> attendedCoursePlans;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "account")
+    @ManyToMany(mappedBy = "accounts")
     private List<ExamPlan> examPlans;
 
     public List<ExamPlan> getExamPlans() {

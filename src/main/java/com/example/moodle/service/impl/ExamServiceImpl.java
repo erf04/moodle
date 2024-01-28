@@ -4,6 +4,9 @@ import com.example.moodle.model.Exam;
 import com.example.moodle.repository.ExamRepository;
 import com.example.moodle.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class ExamServiceImpl implements ExamService {
 

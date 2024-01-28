@@ -1,6 +1,8 @@
 package com.example.moodle.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 @Entity
 @Table(name = "exams")
@@ -25,6 +27,16 @@ public class Exam {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "exam")
     private List<ExamPlan> examPlans;
+
+    private LocalDateTime examTime;
+
+    public LocalDateTime getExamTime() {
+        return examTime;
+    }
+
+    public void setExamTime(LocalDateTime examTime) {
+        this.examTime = examTime;
+    }
 
     public List<ExamPlan> getExamPlans() {
         return examPlans;
