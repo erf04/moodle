@@ -9,6 +9,14 @@
 <div th:replace="~{base :: csslinks}"></div>
 <div th:replace="~{base :: navbar}"></div>
 <div class="row main-content">
+    <div class="card" style="width: 18rem;" th:each="courseplan: ${user.getAttendedCoursePlans}">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${courseplan.getCourse.getName}</h5>
+            <p class="card-text">${courseplan.getCreator.getFirstName}-${courseplan.getCreator.getLastName}</p>
+            <a href="#" class="btn btn-primary">See Course Info</a>
+        </div>
+    </div>
     <div th:replace="~{base::leftsidebar}"></div>
     <!--Content right-->
         <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
