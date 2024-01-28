@@ -208,13 +208,10 @@
                 <ul class="sidebar-menu mt-4 mb-4">
                     <li class="parent">
                         <a href="#" onclick="toggle_menu('dashboard'); return false" class=""><i class="fa fa-dashboard mr-3"> </i>
-                            <span class="none">Dashboard <i class="fa fa-angle-down pull-right align-bottom"></i></span>
+                            <span class="none">Course <i class="fa fa-angle-down pull-right align-bottom"></i></span>
                         </a>
-                        <ul class="children" id="dashboard">
-                            <li class="child"><a href="index.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Default</a></li>
-                            <li class="child"><a href="index2.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Analytics</a></li>
-                            <li class="child"><a href="index3.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Ecommerce</a></li>
-                            <li class="child"><a href="index4.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Cryptocurrency</a></li>
+                        <ul class="children" id="dashboard" th:each="courseplan: ${user.getAttendedCoursePlans}">
+                            <li class="child"><a href="index.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> ${courseplan.course.getName}</a></li>
                         </ul>
                     </li>
                     </li>
