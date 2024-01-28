@@ -12,8 +12,8 @@
     <div class="card" style="width: 18rem;" th:each="courseplan: ${user.getAttendedCoursePlans}">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">${courseplan.getCourse.getName}</h5>
-            <p class="card-text">${courseplan.getCreator.getFirstName}-${courseplan.getCreator.getLastName}</p>
+            <h5 class="card-title" style="font-weight: bold" th:text="${courseplan.getCourse.getName}"></h5>
+            <p class="card-text" style="font-weight: lighter" th:text="${courseplan.getCreator.getFirstName}-${courseplan.getCreator.getLastName}"></p>
             <a href="#" class="btn btn-primary">See Course Info</a>
         </div>
     </div>
