@@ -8,10 +8,7 @@ import com.example.moodle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -45,20 +42,23 @@ public class ExamController {
 
     }
 
-    @PostMapping("/submit-exam/{user_id}/{question_id}")
+    @PostMapping("/submit-exam/{user_id}/{exam_id}")
     public String submitExam(@PathVariable("user_id") Long user_id,
-                                 @PathVariable("question_id") Long question_id,
-                                 @RequestParam("choice_ids") Long choice_id,
+                                 @PathVariable("exam_id") Long exam_id,
+                                 @RequestBody List<Long> selectedAnswerIds,
                                  Model model){
 
-        Question question=questionService.findById(question_id);
-        Choice choice= choiceService.findById(choice_id);
-
-        SubmittedAnswer submittedAnswer=new SubmittedAnswer();
-        submittedAnswer.setQuestion(question);
-        submittedAnswer.setSubmitter(accountService.findByID(user_id));
-        submittedAnswer.setUserChoice(choice);
-        return "sagi";
+        Exam exam=examService.findExamById(exam_id);
+//        Choice choice= choiceService.findById(choice_id)
+        System.out.println(selectedAnswerIds.size());
+        for(Long choiceId:selectedAnswerIds){
+            System.out.println(choiceId);
+        }
+//        SubmittedAnswer submittedAnswer=new SubmittedAnswer();
+//        submittedAnswer.setQuestion(question);
+//        submittedAnswer.setSubmitter(accountService.findByID(user_id));
+//        submittedAnswer.setUserChoice(choice);
+        return "redirect:/show-exam/"+user_id+"/"+exam_id+"/";
 
     }
 
