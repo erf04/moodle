@@ -78,7 +78,7 @@ public class Exam {
         this.questions = questions;
     }
 
-    public Teacher getCreator() {
+    public Account getCreator() {
         return this.getCoursePlan().getCreator();
     }
 

@@ -70,12 +70,6 @@ public class AuthController {
 
     @GetMapping("/home/{user_id}")
     public String home(@PathVariable Long user_id,Model model){
-        accountService.addCoursePlanToAccount(1L,1L);
-        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
-        System.out.println(coursePlans.isEmpty());
-        for (CoursePlan coursePlan:coursePlans){
-            System.out.println(coursePlan.getId()+":"+coursePlan.getParticipants().size());
-        }
         model.addAttribute("user",accountService.findByID(user_id));
         return "userhome";
     }
