@@ -49,7 +49,6 @@ public class ExamController {
     public String submitExam(@PathVariable("user_id") Long user_id,
                                  @PathVariable("question_id") Long question_id,
                                  @RequestParam("choice_ids") Long choice_id,
-                                 @RequestParam("index") Integer index,
                                  Model model){
 
         Question question=questionService.findById(question_id);
@@ -59,7 +58,7 @@ public class ExamController {
         submittedAnswer.setQuestion(question);
         submittedAnswer.setSubmitter(accountService.findByID(user_id));
         submittedAnswer.setUserChoice(choice);
-        submittedAnswer.
+        return "sagi";
 
     }
 
