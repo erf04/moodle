@@ -1,6 +1,7 @@
 package com.example.moodle.service.impl;
 
 import com.example.moodle.model.Account;
+import com.example.moodle.model.Course;
 import com.example.moodle.model.CoursePlan;
 import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.CoursePlanService;
@@ -15,4 +16,8 @@ public class CoursePlanServiceImpl implements CoursePlanService {
     @Autowired
     private CoursePlanRepository coursePlanRepository;
 
+    @Override
+    public List<CoursePlan> findByCourse(Course course) {
+        return coursePlanRepository.findCoursePlansByCourse(course);
+    }
 }
