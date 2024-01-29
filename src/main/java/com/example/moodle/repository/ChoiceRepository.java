@@ -1,9 +1,10 @@
 package com.example.moodle.repository;
 
-import com.example.moodle.model.Exam;
+import com.example.moodle.model.Choice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ExamRepository extends JpaRepository<Exam,Long> {
+public interface ChoiceRepository extends JpaRepository<Choice,Long> {
+
 }
