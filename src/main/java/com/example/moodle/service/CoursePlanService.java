@@ -10,9 +10,8 @@ import java.util.List;
 
 @Service
 public interface CoursePlanService {
-<<<<<<< HEAD
+
     List<CoursePlan> findByCourse(Course course);
-=======
+
     List<CoursePlan> findCoursePlansByTeacher(Teacher teacher);
->>>>>>> courseBranch
 }
