@@ -13,7 +13,7 @@ public class CoursePlan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    private String name;
     @ManyToOne
     private Course course;
     private LocalDateTime startTime;
@@ -84,7 +84,7 @@ public class CoursePlan {
         return creator;
     }
 
-    public void setCreator(Teacher creator) {
+    public void setCreator(Account creator) {
         this.creator = creator;
     }
 
@@ -98,4 +98,6 @@ public class CoursePlan {
 
     @CreationTimestamp
     private LocalDateTime creationTime;
+    public void setName(String name){ this.name=name;}
+    public String getName(){return this.name;}
 }
