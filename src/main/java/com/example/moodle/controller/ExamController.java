@@ -45,10 +45,10 @@ public class ExamController {
 
     }
 
-    @PostMapping("/submit-exam/{user_id}/{question_id}")
+    @PostMapping("/submit-exam/{user_id}/{exam_id}")
     public String submitExam(@PathVariable("user_id") Long user_id,
-                                 @PathVariable("question_id") Long question_id,
-                                 @RequestParam("choice_ids") Long choice_id,
+                                 @PathVariable("exam_id") Long exam_id,
+                                 @RequestParam("choice_id") List<Long> selectedAnswerIds,
                                  Model model){
 
         Question question=questionService.findById(question_id);
