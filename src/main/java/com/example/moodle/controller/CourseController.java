@@ -35,6 +35,12 @@ public class CourseController {
         System.out.println(course.getName());
         courseRepository.save(course);
         return "redirect:/addcourse/"+id;
+    }
 
+    @PostMapping("/searchCourse")
+    public  String courseSearch(@RequestParam("searchedContent") String partialCourseName){
+        System.out.println(partialCourseName);
+        //courseRepository.searchCourse();
+        return "searched";
     }
 }

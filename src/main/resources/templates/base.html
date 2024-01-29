@@ -166,9 +166,9 @@
 
                 <!--Search box and avatar-->
                 <div class="col-sm-8 col-4 text-right flex-header-menu justify-content-end">
-                    <div class="search-rounded mr-3">
-                        <input type="text" class="form-control search-box" placeholder="Enter keywords.." />
-                    </div>
+                    <form class="search-rounded mr-3" method="post" th:action="@{/searchCourse}">
+                        <input type="text" class="form-control search-box" placeholder="Search" name="searchedContent" />
+                    </form>
                     <div class="mr-4">
                         <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="assets/img/profile.jpg" alt="Adam" class="rounded-circle" width="40px" height="40px">
