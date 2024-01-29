@@ -6,6 +6,8 @@ import com.example.moodle.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CourseServiceImpl implements CourseService {
 
@@ -19,5 +21,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getCourseById(Long id) {
         return null;
+    }
+
+    @Override
+    public List<Course> findAllByNameContaining(String name) {
+        return courseRepository.findAllByNameContaining(name);
     }
 }

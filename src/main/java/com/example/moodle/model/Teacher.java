@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "teachers")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 public class Teacher extends Account{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -16,6 +16,14 @@ public class Teacher extends Account{
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "creator")
     private List<Exam> exams;
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
 
     public List<CoursePlan> getCoursePlans() {
         return coursePlans;

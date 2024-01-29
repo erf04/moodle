@@ -43,7 +43,7 @@
         <!--Logo-->
         <div class="col-sm-3 pl-0 text-center header-logo">
             <div class="bg-theme mr-3 pt-3 pb-2 mb-0">
-                <h3 class="logo"><a href="#" class="text-secondary logo"><i class="fa fa-rocket"></i> Sleek<span class="small">admin</span></a></h3>
+                <h3 class="logo"><a href="#" class="text-secondary logo"><i class="fa fa-rocket"></i> Spring<span class="small">rocket</span></a></h3>
             </div>
         </div>
         <!--Logo-->
@@ -166,12 +166,12 @@
 
                 <!--Search box and avatar-->
                 <div class="col-sm-8 col-4 text-right flex-header-menu justify-content-end">
-                    <div class="search-rounded mr-3">
-                        <input type="text" class="form-control search-box" placeholder="Enter keywords.." />
-                    </div>
+                    <form class="search-rounded mr-3" method="post" th:action="@{'/searchCourse/'+${user.getId()}}">
+                        <input type="text" class="form-control search-box" placeholder="Search" name="searchedContent" />
+                    </form>
                     <div class="mr-4">
                         <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="assets/img/profile.jpg" alt="Adam" class="rounded-circle" width="40px" height="40px">
+                            <img src="data:image/png;base64,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" alt="Order 66" class="rounded-circle" width="40px" height="40px">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="#"><i class="fa fa-user pr-2"></i> Profile</a>
@@ -197,7 +197,7 @@
         <div class="inner-sidebar mr-3">
             <!--Image Avatar-->
             <div class="avatar text-center">
-                <img src="assets/img/client-img4.png" alt="" class="rounded-circle" />
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAMFBMVEXk5ueutLfX2tynrrLn6eqrsbXq7O3h4+SyuLva3d6/w8bLz9HU19nR1NbIzM66v8KaEzi7AAAFHUlEQVR4nO2d23LjIAxAjREXYwP//7cLTrpNUzs1IEdyhvOwM7vbB5+RAHHtMHQ6nU6n0+l0Op1Op9PpdDqdTqfT6XQ6nU4JoDUMZhoTk1n/clHSt5vFRftNdN5oTf1dFYA2wYrf2HA5H9DBSrXhIoSSYoYLpRsMQcpNkxtSBkP9jUcxs3qlsuqoYC4QHTDebufXk4717HVgcuqIS2o7yk28bcDHYyqrjvWc+zUI4rhLshGBb2zAFZjcdNzAVAcKUuy/TeRpU+PC1qbKJdswHEBdnUsacQL1p/8i1Lqk2MzUH/8TWKpVcg+9sGo25lAJs4udqAUeqW4w99hEPqEB3+aSOgFGhU2jSo4Nl9Do8Nf05YCMYxIaaHdJNjyGTh0RXISILEJjMAKT4DBV043d8n8cvQyYrdWxCpSlD42ecVwSM3mrAZzmL3LvTN2hwYSUZQk7EucZ4GVZmgoQ5xlg9WWCQZ5NlZPlTZlIOxOABa/JJGgnaZhNJjcaWpmGqf+GDO3ShkFs/+Q9AGb7X5fQCPMMJrTxf4W0PIMRtTMTgrIGQO6ZhSKVaV6WeZJZ6FzQZeQnySj/QTLyk2Ro20zL4v+mTB9nmMqQLtB8UjmDXTWTFprNu0xPMrRTAOTJGe1OLfK02dNOm1G7M+pVQPNBS024i4DURzXAI6410zaZofk4wwPkWZY3zpBc0ihDHRjMwpk8y5IN1jZgpDYZEPcBA/kuYAJwXCy1xwrMKCc0mJwKhqLDzHtQW9yBpT00kkFXdqPuEPAjynJo/SswNQeG040N35Zoktf52abiWTnqz/8BTC31puWUZEPjTg31MZNfNExsKFfL96it0Xg1/i/mqmbD0wVqOmjS7aXXjAdvAn67UG7I/AEYWxIcKchn/a+AwR23kbzGyg30cnBCoNTCprjcBYw7pOOYDfvbgB7j6+JGKRvHq7zaALA4uxuepOKWS70IAFNwdqOjzkEJ05VUMgBm9CFaKdXqlP6U0kY3j+ZqKivJx0yLD8FlQpiXabqmyZ307eaL4coi62stT1xQJ3/2YCY/pwyLD8/OuJxqZv3fa5BayhKikCtP3Zm6/6t188TysvkX+dtSMJz97bA11qQfyj3bYPhJ5WY+zlmkZA6QfjqGlHecfFJi5YioIpHvzEs5tzBJOtBDDknprOynj4jB05cFqWxpNHnwWQbKTk6/LChLfVLVNhsqHT34iKZy8xE2TBQ6WgdEjQfi26MD4Nsbyg7yvUfokopAutC8hZLubas2qVwpWlCq0RHhLXMFGEbUo4x7OtafP46CCWgnf17bKDeeG5y8UnFyhj3o2FOf2oPhTWH50onnbUMB7nW5IzZ2Pqnl6OWtYblzzmtuULeX1Io6Zff2fS3/yUZij6BgIpGLyDfRUGMDeMdKq2wwTwm1HVlAAPE6OrkLog0DlwSOzfuHym0w2g3gXl6qx2L0aajXfVpAuJDWeCwOkebXQ2Fk49J8boB4sHymbfAEqoJsB9VQdGIcWEZFNby1h3TKH5H6REN7IA+Tyh6t/ej1CdS+t6l5lDHPVA2dMFJ/9iZ1oWEamKprtujvFmBRc2kQ82osKqripWoms5gtiudp4Kk/eZfyJxC4TMm2KO0CsB8uQ6X0QQfs13FQKc4zmoXlgxROoDk3mVQ7FzUazOdxT6Dsvh2MnAMjVNFvFmM3xXyibJ0G5e71edgSGcNm5W+HIhkneVNUa66/AZMxZaMm8KbIpdPpdDqdTucq/AMef1AMtjuGRwAAAABJRU5ErkJggg==" alt="" class="rounded-circle" />
                 <p><strong th:text="${user.userName}"></strong></p>
                 <span class="text-primary small"><strong></strong></span>
             </div>
@@ -210,133 +210,17 @@
                         <a href="#" onclick="toggle_menu('dashboard'); return false" class=""><i class="fa fa-dashboard mr-3"> </i>
                             <span class="none">Course <i class="fa fa-angle-down pull-right align-bottom"></i></span>
                         </a>
-                        <ul class="children" id="dashboard" th:each="courseplan: ${user.getAttendedCoursePlans}">
-                            <li class="child"><a href="index.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> ${courseplan.course.getName}</a></li>
-                        </ul>
-                    </li>
-                    </li>
-                    <li class="parent">
-                        <a href="widgets.html" class=""><i class="fa fa-puzzle-piece mr-3"></i>
-                            <span class="none">Widget </span>
-                        </a>
-                    </li>
-                    <li class="parent">
-                        <a href="#" onclick="toggle_menu('ul_element'); return false" class=""><i class="fa fa-puzzle-piece mr-3"></i>
-                            <span class="none">UI Elements <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                        </a>
-                        <ul class="children" id="ul_element">
-                            <li class="child"><a href="accordion.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Accordions</a></li>
-                            <li class="child"><a href="buttons.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Buttons</a></li>
-                            <li class="child"><a href="badges.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Badges</a></li>
-                            <li class="child"><a href="breadcrumb.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Breadcrumbs</a></li>
-                            <li class="child"><a href="cards.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Cards</a></li>
-                            <li class="child"><a href="icons.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Icons</a></li>
-                            <li class="child"><a href="modal.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Modals</a></li>
-                            <li class="child"><a href="notification.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Notification</a></li>
-                            <li class="child"><a href="progressbar.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Progressbar</a></li>
-                            <li class="child"><a href="sweetalert.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Sweet alert</a></li>
-                            <li class="child"><a href="tabs.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Tabs</a></li>
-                            <li class="child"><a href="tooltip-popover.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Tooltip and Popovers</a></li>
-                            <li class="child"><a href="typography.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Typography</a></li>
+                        <ul class="children" id="dashboard" th:each="courseplan: ${courseplans}">
+                            <li class="child"><a href="index.html" class="ml-4"><i class="fa fa-angle-right mr-2" th:text="${courseplan.getCourse().getName()}"> </i><p class="fa fa-angle-right mr-2" th:text="${courseplan.getCreator().getUserName()}"> </p></a></li>
                         </ul>
                     </li>
                     <li class="parent">
-                        <a href="#" onclick="toggle_menu('form_element'); return false" class=""><i class="fa fa-pencil-square mr-3"></i>
-                            <span class="none">Form Elements <i class="fa fa-angle-down pull-right align-bottom"></i></span>
+                        <a href="#" onclick="toggle_menu('dashboard'); return false" class=""><i class="fa fa-dashboard mr-3"> </i>
+                            <span class="none">Exam <i class="fa fa-angle-down pull-right align-bottom"></i></span>
                         </a>
-                        <ul class="children" id="form_element">
-                            <li class="child"><a href="form-general.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Basic Elements</a></li>
-                            <li class="child"><a href="form-advanced.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Advanced Elements</a></li>
-                            <li class="child"><a href="form-validation.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Validation</a></li>
-                            <li class="child"><a href="form-wizard.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Form Wizard</a></li>
+                        <ul class="children" th:each="courseplan: ${courseplans}">
+                            <li class="child"><a href="index.html" class="ml-4"><i class="fa fa-angle-right mr-2" th:text="${courseplan.getCourse().getName()}"> </i><p class="fa fa-angle-right mr-2" th:text="${courseplan.getCreator().getUserName()}"> </p></a></li>
                         </ul>
-                    </li>
-                    <li class="parent">
-                        <a href="#" onclick="toggle_menu('editors'); return false" class=""><i class="fa fa-pencil-square-o mr-3"></i>
-                            <span class="none">Text Editors <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                        </a>
-                        <ul class="children" id="editors">
-                            <li class="child"><a href="ckeditor-classic.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Ckeditor classic</a></li>
-                            <li class="child"><a href="ckeditor-inline.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Ckeditor inline</a></li>
-                            <li class="child"><a href="ckeditor-document.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Ckeditor document</a></li>
-                            <li class="child"><a href="summernote.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Summernote editor</a></li>
-                        </ul>
-                    </li>
-                    <li class="parent">
-                        <a href="#" onclick="toggle_menu('tables'); return false" class=""><i class="fa fa-pencil-square mr-3"></i>
-                            <span class="none">Tables <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                        </a>
-                        <ul class="children" id="tables">
-                            <li class="child"><a href="basic-tables.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Basic Tables</a></li>
-                            <li class="child"><a href="datatable.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Datatables</a></li>
-                            <li class="child"><a href="jsgrid-table.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> JSGrid Tables</a></li>
-                        </ul>
-                    </li>
-                    <li class="parent">
-                        <a href="#" onclick="toggle_menu('charts'); return false" class=""><i class="fa fa-pie-chart mr-3"></i>
-                            <span class="none">Charts <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                        </a>
-                        <ul class="children" id="charts">
-                            <li class="child"><a href="chart.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Chart JS</a></li>
-                            <li class="child"><a href="chartist.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Chartist JS</a></li>
-                            <li class="child"><a href="echarts.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Echarts JS</a></li>
-                            <li class="child"><a href="flot.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Flot JS</a></li>
-                            <li class="child"><a href="morris.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Morris JS</a></li>
-                            <li class="child"><a href="nvd3.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> NVD3 JS</a></li>
-                            <li class="child"><a href="sparkline.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Sparkline JS</a></li>
-                        </ul>
-                    </li>
-                    <li class="parent">
-                        <a href="icons.html" class=""><i class="fa fa-toggle-on mr-3"></i>
-                            <span class="none">Icons</span>
-                        </a>
-                    </li>
-                    <li class="parent">
-                        <a href="#" onclick="toggle_menu('ecommerce'); return false" class=""><i class="fa fa-shopping-cart mr-3"></i>
-                            <span class="none">Ecommerce <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                        </a>
-                        <ul class="children" id="ecommerce">
-                            <li class="child"><a href="products.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> ProductList</a></li>
-                            <li class="child"><a href="product-detail.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> ProductDetail</a></li>
-                            <li class="child"><a href="orders.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> OrderList</a></li>
-                            <li class="child"><a href="invoice.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Invoice</a></li>
-                        </ul>
-                    </li>
-                    <li class="parent">
-                        <a href="#" onclick="toggle_menu('maps'); return false" class=""><i class="fa fa-map mr-3"></i>
-                            <span class="none">Maps <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                        </a>
-                        <ul class="children" id="maps">
-                            <li class="child"><a href="jvector-maps.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Jvector Maps</a></li>
-                            <li class="child"><a href="google-maps.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Google Maps</a></li>
-                        </ul>
-                    </li>
-                    <li class="parent">
-                        <a href="#" onclick="toggle_menu('pages'); return false" class=""><i class="fa fa-file mr-3"></i>
-                            <span class="none">Pages <i class="fa fa-angle-down pull-right align-bottom"></i></span>
-                        </a>
-                        <ul class="children" id="pages">
-                            <li class="child"><a href="email-inbox.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Email-Inbox</a></li>
-                            <li class="child"><a href="email.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Email-Compose</a></li>
-                            <li class="child"><a href="login.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Login</a></li>
-                            <li class="child"><a href="register.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Signup</a></li>
-                            <li class="child"><a href="lockscreen.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Lock Screen</a></li>
-                            <li class="child"><a href="forgot-password.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Forgot Password</a></li>
-                            <li class="child"><a href="profile.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Profile</a></li>
-                            <li class="child"><a href="gallery.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Gallery</a></li>
-                            <li class="child"><a href="invoice.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Invoice</a></li>
-                            <li class="child"><a href="search-result.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Search</a></li>
-                            <li class="child"><a href="pricing.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Pricing</a></li>
-                            <li class="child"><a href="blank.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Blank Page</a></li>
-                            <li class="child"><a href="error-404.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Error 404</a></li>
-                            <li class="child"><a href="error-500.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Error 500</a></li>
-                            <li class="child"><a href="error-504.html" class="ml-4"><i class="fa fa-angle-right mr-2"></i> Error 504</a></li>
-                        </ul>
-                    </li>
-                    <li class="parent">
-                        <a href="fullcalendar.html" class=""><i class="fa fa-calendar-o mr-3"> </i>
-                            <span class="none">Full Calendar </span>
-                        </a>
                     </li>
                 </ul>
             </div>
