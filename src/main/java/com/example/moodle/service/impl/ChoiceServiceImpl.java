@@ -4,7 +4,9 @@ import com.example.moodle.model.Choice;
 import com.example.moodle.repository.ChoiceRepository;
 import com.example.moodle.service.ChoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ChoiceServiceImpl implements ChoiceService {
 
     @Autowired
