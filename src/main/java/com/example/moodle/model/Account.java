@@ -50,7 +50,6 @@ public class Account{
     private List<SubmittedAnswer> submittedAnswers;
 
 
-
     public String getEmail() {
         return email;
     }
