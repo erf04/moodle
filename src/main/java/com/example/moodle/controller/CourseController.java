@@ -44,13 +44,17 @@ public class CourseController {
         return "redirect:/addcourse/"+id;
     }
 
-    @PostMapping("/searchCourse")
-    public  String courseSearch(@RequestParam("searchedContent") String partialCourseName){
+    @PostMapping("/searchCourse/{user_id}")
+    public  String courseSearch(Model model,@RequestParam("searchedContent") String partialCourseName,@PathVariable("user_id") Long id){
+        Account account=accountService.findByID(id);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(id);
+        model.addAttribute("user",account);
+        model.addAttribute("courseplans",coursePlans);
         System.out.println(partialCourseName);
         List<Course> courses=courseRepository.findAllByNameContaining(partialCourseName);
-        List<CoursePlan> coursePlans=new ArrayList<>();
+        List<CoursePlan> coursePlansNew=new ArrayList<>();
         for (Course course:courses){
-            coursePlans.addAll(coursePlanService.findByCourse(course));
+            coursePlansNew.addAll(coursePlanService.findByCourse(course));
         }
 
         System.out.println(coursePlans.get(0));

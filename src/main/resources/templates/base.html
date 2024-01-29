@@ -166,7 +166,7 @@
 
                 <!--Search box and avatar-->
                 <div class="col-sm-8 col-4 text-right flex-header-menu justify-content-end">
-                    <form class="search-rounded mr-3" method="post" th:action="@{/searchCourse}">
+                    <form class="search-rounded mr-3" method="post" th:action="@{'/searchCourse/'+${user.getId()}}">
                         <input type="text" class="form-control search-box" placeholder="Search" name="searchedContent" />
                     </form>
                     <div class="mr-4">
