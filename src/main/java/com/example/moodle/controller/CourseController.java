@@ -4,6 +4,7 @@ import com.example.moodle.model.Account;
 import com.example.moodle.model.Admin;
 import com.example.moodle.model.Course;
 import com.example.moodle.model.CoursePlan;
+import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.repository.CourseRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
@@ -25,6 +26,8 @@ public class CourseController {
     private AccountService accountService;
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private CoursePlanRepository coursePlanRepository;
     @Autowired
     private CoursePlanService coursePlanService;
 
@@ -53,6 +56,36 @@ public class CourseController {
         if (teacher!=null){
             courseRepository.save(course);
             return "redirect:/addcourse/"+id;
+        }
+        else{
+            return "error500";
+        }
+    }
+
+    @GetMapping("/addcourseplan/{user_id}")
+    public String showAddCoursePlan(@PathVariable Long user_id, Model model) {
+        Account user=accountService.findByID(user_id);
+        model.addAttribute("user",user);
+        if(user instanceof Admin){
+            CoursePlan coursePlan=new CoursePlan();
+            model.addAttribute("coursePlan",coursePlan);
+            model.addAttribute("courses",courseRepository.findAll());
+
+            return "addCoursePlan";
+        }
+        else{
+            return "error500";
+        }
+
+
+    }
+    @PostMapping("/savecourseplan/{user_id}")
+    public  String courseplanSave(@ModelAttribute("courseplan") CoursePlan coursePlan,@PathVariable("user_id") Long id){
+        System.out.println(coursePlan.getName());
+        Account teacher= teacherService.findTeacherById(id);
+        if (teacher!=null){
+            coursePlanRepository.save(coursePlan);
+            return "redirect:/addcourseplan/"+id;
         }
         else{
             return "error500";
