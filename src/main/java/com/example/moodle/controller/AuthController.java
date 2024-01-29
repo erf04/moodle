@@ -70,7 +70,10 @@ public class AuthController {
 
     @GetMapping("/home/{user_id}")
     public String home(@PathVariable Long user_id,Model model){
-        model.addAttribute("user",accountService.findByID(user_id));
+        Account account=accountService.findByID(user_id);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("user",account);
+        model.addAttribute("courseplans",coursePlans);
         return "userhome";
     }
 }
