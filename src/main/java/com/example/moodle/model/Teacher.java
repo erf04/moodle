@@ -4,14 +4,26 @@ import jakarta.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "teachers")
-public class Teacher extends Person{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Teacher extends Account{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "creator")
     private List<CoursePlan> coursePlans;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "creator")
+    private List<Exam> exams;
+
+    public List<CoursePlan> getCoursePlans() {
+        return coursePlans;
+    }
+
+    public void setCoursePlans(List<CoursePlan> coursePlans) {
+        this.coursePlans = coursePlans;
+    }
 
     @Override
     public Long getId() {

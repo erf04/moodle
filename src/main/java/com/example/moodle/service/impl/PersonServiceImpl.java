@@ -33,4 +33,9 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> findByFirstName(String firstname) {
         return personRepository.findPersonsByFirstName(firstname);
     }
+
+    @Override
+    public Person save(Person person) {
+        return personRepository.save(person);
+    }
 }

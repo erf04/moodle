@@ -1,8 +1,11 @@
 package com.example.moodle.controller;
 
 import com.example.moodle.model.Account;
+import com.example.moodle.model.CoursePlan;
 import com.example.moodle.model.Person;
+import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.AccountService;
+import com.example.moodle.service.CoursePlanService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class AuthController {

@@ -3,6 +3,7 @@ package com.example.moodle.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class ExamPlan {
@@ -13,8 +14,13 @@ public class ExamPlan {
     private int score;
     private LocalDateTime attendingDate;
 
-    @ManyToOne
-    private Account account;
+    @ManyToMany
+    @JoinTable(
+            name = "examPlan_account",
+            joinColumns = @JoinColumn(name = "examPlan_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id")
+    )
+    private List<Account> accounts;
 
     @ManyToOne
     private Exam exam;
@@ -51,11 +57,11 @@ public class ExamPlan {
         this.attendingDate = attendingDate;
     }
 
-    public Account getAccount() {
-        return account;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

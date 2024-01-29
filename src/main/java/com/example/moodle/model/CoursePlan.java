@@ -23,7 +23,7 @@ public class CoursePlan {
     private List<Exam> exams;
 
     @ManyToOne
-    private Teacher creator;
+    private Account creator;
 
     @ManyToMany
     @JoinTable(
@@ -32,7 +32,6 @@ public class CoursePlan {
             inverseJoinColumns = @JoinColumn(name = "coursePlan_id")
     )
     private List<Account> participants;
-
     public List<Account> getParticipants() {
         return participants;
     }
@@ -81,7 +80,7 @@ public class CoursePlan {
         this.exams = exams;
     }
 
-    public Teacher getCreator() {
+    public Account getCreator() {
         return creator;
     }
 
