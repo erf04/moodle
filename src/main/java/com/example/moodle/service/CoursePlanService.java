@@ -8,5 +8,4 @@ import java.util.List;
 
 @Service
 public interface CoursePlanService {
-    List<CoursePlan> findCoursePlanByParticipants(List<Account> accounts);
 }

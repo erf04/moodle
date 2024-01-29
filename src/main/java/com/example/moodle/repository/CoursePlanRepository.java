@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface CoursePlanRepository extends JpaRepository<CoursePlan,Long> {
-    List<CoursePlan> findCoursePlanByParticipants(List<Account> accounts);
 }

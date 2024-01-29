@@ -25,8 +25,6 @@ public class ExamController {
     private CourseService courseService;
 
     @Autowired
-    private CoursePlanRepository coursePlanRepository;
-    @Autowired
     private AccountService accountService;
 
     @Autowired
@@ -55,7 +53,7 @@ public class ExamController {
         exam.setCreator(teacher);
         ExamPlan examPlan=new ExamPlan();
         examPlan.setExam(exam);
-        exam.setCoursePlan(coursePlanRepository.getReferenceById(1L));
+//        exam.setCoursePlan(coursePlanRepository.getReferenceById(1L));
         examPlan.setAccounts(List.of(accountService.findByID(1L),accountService.findByID(2L)));
         exam.setQuestions(List.of(question));
         exam.setExamPlans(List.of(examPlan));

@@ -1,7 +1,9 @@
 package com.example.moodle.controller;
 
 import com.example.moodle.model.Account;
+import com.example.moodle.model.CoursePlan;
 import com.example.moodle.model.Person;
+import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -21,8 +23,6 @@ public class AuthController {
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    private CoursePlanService coursePlanService;
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         Account account =new Account();
@@ -70,8 +70,12 @@ public class AuthController {
 
     @GetMapping("/home/{user_id}")
     public String home(@PathVariable Long user_id,Model model){
-        Account account=accountService.findByID(user_id);
-        System.out.println(coursePlanService.findCoursePlanByParticipants(List.of(account)).isEmpty());
+        accountService.addCoursePlanToAccount(1L,1L);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        System.out.println(coursePlans.isEmpty());
+        for (CoursePlan coursePlan:coursePlans){
+            System.out.println(coursePlan.getId()+":"+coursePlan.getParticipants().size());
+        }
         model.addAttribute("user",accountService.findByID(user_id));
         return "userhome";
     }

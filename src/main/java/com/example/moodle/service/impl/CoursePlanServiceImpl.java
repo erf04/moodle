@@ -14,8 +14,5 @@ public class CoursePlanServiceImpl implements CoursePlanService {
 
     @Autowired
     private CoursePlanRepository coursePlanRepository;
-    @Override
-    public List<CoursePlan> findCoursePlanByParticipants(List<Account> accounts) {
-        return coursePlanRepository.findCoursePlanByParticipants(accounts);
-    }
+
 }
