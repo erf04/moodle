@@ -23,7 +23,7 @@ public class CoursePlan {
     private List<Exam> exams;
 
     @ManyToOne
-    private Teacher creator;
+    private Account creator;
 
     @ManyToMany
     @JoinTable(
@@ -80,7 +80,7 @@ public class CoursePlan {
         this.exams = exams;
     }
 
-    public Teacher getCreator() {
+    public Account getCreator() {
         return creator;
     }
 
