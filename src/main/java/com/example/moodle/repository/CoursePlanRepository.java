@@ -11,9 +11,8 @@ import java.util.List;
 
 @Repository
 public interface CoursePlanRepository extends JpaRepository<CoursePlan,Long> {
-<<<<<<< HEAD
+
     List<CoursePlan> findCoursePlansByCourse(Course course);
-=======
+
     List<CoursePlan> findCoursePlansByCreator(Teacher teacher);
->>>>>>> courseBranch
 }

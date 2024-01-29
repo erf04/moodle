@@ -18,12 +18,12 @@ public class CoursePlanServiceImpl implements CoursePlanService {
     private CoursePlanRepository coursePlanRepository;
 
     @Override
-<<<<<<< HEAD
+
     public List<CoursePlan> findByCourse(Course course) {
         return coursePlanRepository.findCoursePlansByCourse(course);
-=======
+    }
     public List<CoursePlan> findCoursePlansByTeacher(Teacher teacher) {
         return coursePlanRepository.findCoursePlansByCreator(teacher);
->>>>>>> courseBranch
+
     }
 }
