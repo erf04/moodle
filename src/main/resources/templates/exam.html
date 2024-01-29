@@ -11,7 +11,7 @@
         <div th:replace="~{base::leftsidebar}"></div>
         <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
             <div class="container mt-sm-5 my-1">
-                <form th:action="@{'/submit-exam/' + ${user.getId()} +'/'+${exam_id}}" method="post">
+                <form th:action="@{'/submit-exam/' + ${user.getId()} +'/'+${exam_id}}" method="post" enctype="application/x-www-form-urlencoded">
                     <div class="question ml-sm-5 pl-sm-5 pt-2"  th:each="question :${questions}">
                         <div class="py-2 h5">Q.<b th:text="${question.getText()}"></b></div>
                         <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"  th:each="choice:${question.getChoices()}">
@@ -35,6 +35,7 @@
                 </form>
         </div>
     </div>
+</div>
 <div th:replace="~{base :: jslinks}"></div>
 </body>
 </html>
