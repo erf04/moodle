@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" th:extends="base.html">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>add course</title>
 </head>
 <body>
-$END$
+<div th:replace="~{base :: csslinks}"></div>
+<div th:replace="~{base :: navbar}"></div>
+<div class="row main-content">
+    <div th:replace="~{base::leftsidebar}"></div>
+    <!--Content right-->
+
+    <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+        <h5 class="mb-0" ><strong>Accordion</strong></h5>
+        <h1>helooooooooo</h1>
+        <form th:object="${coursePlan}" th:action="@{'/savecourseplan/'+${user.getId()}}" method="post">
+            <input type="hidden" name="user" th:value="${user}">
+            <div class="form-group">
+                <label for="courseName">name:</label>
+                <input type="text" class="form-control" id="courseName" placeholder="Example input" th:field="*{name}"/>
+            </div>
+            <div>
+                <label for="course">course:</label>
+            <select id="course" name="course" th:field="*{course}">
+                <option value="">Choose a course:</option>
+                <th:block th:each="course : ${courses}">
+                    <option th:value="${course.id}" th:text="${course.name}"></option>
+                </th:block>
+            </select>
+            </div>
+            <div class="form-group">
+                <label for="courseName">start time :</label>
+                <input type="datetime-local" class="form-control" id="courseStart" placeholder="Example input" th:field="*{startTime}"/>
+            </div>
+            <div class="form-group">
+                <label for="courseName">end time:</label>
+                <input type="datetime-local" class="form-control" id="courseEnd" placeholder="Example input" th:field="*{endTime}"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
