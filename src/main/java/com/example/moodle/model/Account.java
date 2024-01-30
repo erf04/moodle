@@ -14,9 +14,26 @@ public class Account{
      private Long id;
     private String userName;
     private String password;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Person person;
     private String email;
+
+    private String firstName;
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public List<CoursePlan> getAttendedCoursePlans() {
         return attendedCoursePlans;
@@ -70,14 +87,6 @@ public class Account{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 
     public Long getId() {

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Controller
 public class CourseController {
     @Autowired
@@ -137,7 +136,6 @@ public class CourseController {
                 }
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
-
             boolean flag = false;
             for (CoursePlan plan : coursePlans) {
                 if (plan == coursePlan) {
@@ -156,7 +154,6 @@ public class CourseController {
 //            }
 //            if (!flag) model.addAttribute("booleanVar",false);
             model.addAttribute("booleanVar",booleanVar);
-
             model.addAttribute("examPlans", examPlan);
             return "courseform";
         }

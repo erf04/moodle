@@ -4,7 +4,6 @@ package com.example.moodle.controller;
 import com.example.moodle.model.*;
 import com.example.moodle.model.Account;
 import com.example.moodle.model.CoursePlan;
-import com.example.moodle.model.Person;
 import com.example.moodle.model.Teacher;
 import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.AccountService;
@@ -37,9 +36,7 @@ public class AuthController {
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         Account account =new Account();
-        Person person=new Person();
         model.addAttribute("account",account);
-        model.addAttribute("person",person);
         return "registerform";
     }
 
@@ -78,7 +75,7 @@ public class AuthController {
             accountService.save(teacher);
             return "redirect:/home/"+teacher.getId()+"?register=success";
         } else {
-            Account student = new Student();
+            Account student = new Account();
             student.setUserName(account.getUserName());
             student.setEmail(account.getEmail());
             student.setPassword(account.getPassword());
