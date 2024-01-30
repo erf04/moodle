@@ -45,7 +45,7 @@ public class Choice {
         isCorrect = correct;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Question question;
     private boolean isCorrect;
 
