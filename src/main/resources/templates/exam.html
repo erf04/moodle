@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<<<<<<< HEAD
+
     <div th:replace="~{base :: csslinks}"></div>
     <div th:replace="~{base::navbar}"></div>
     <div class="row main-content">
@@ -20,7 +20,7 @@
                             <input type="radio" th:field="*{submittedAnswers[__${question.id}__]}" th:value="${choice.id}">
                             <label class="options" th:text="${choice.getText()}"></label>
                                 <span class="checkmark"></span>
-=======
+
 <div th:replace="~{base :: csslinks}"></div>
 <div th:replace="~{base::navbar}"></div>
 <div class="row main-content">
@@ -34,17 +34,17 @@
                         <input type="radio" th:name="'selectedAnswerIds'" th:value="${choice.getId()}">
                         <label class="options" th:text="${choice.getText()}"></label>
                         <span class="checkmark"></span>
->>>>>>> makeExam
+
 
 
                     </div>
-<<<<<<< HEAD
+
                     <div class="d-flex align-items-center pt-3">
 
                         <input class="btn btn-block btn-success" type="submit">
                     </div>
                 </form>
-=======
+
                 </div>
                 <div class="d-flex align-items-center pt-3">
                     <!--                    <div id="prev">-->
@@ -57,7 +57,7 @@
                     <input class="btn btn-block btn-success" type="submit">
                 </div>
             </form>
->>>>>>> makeExam
+
         </div>
     </div>
 </div>
