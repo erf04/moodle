@@ -59,6 +59,7 @@ public class AuthController {
             model.addAttribute("user", account);
             return "redirect:/register";
         }
+        account.getPerson().setId(account.getId());
         accountService.save(account);
         return "redirect:/home/"+account.getId()+"?register=success";
     }
