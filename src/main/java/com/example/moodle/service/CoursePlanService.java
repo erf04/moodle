@@ -14,4 +14,6 @@ public interface CoursePlanService {
     List<CoursePlan> findByCourse(Course course);
 
     List<CoursePlan> findCoursePlansByTeacher(Teacher teacher);
+
+    List<CoursePlan> findCoursePlanByID(Long id);
 }

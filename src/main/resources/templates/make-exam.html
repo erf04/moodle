@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" th:extends="base.html">
+
 <head>
     <meta charset="UTF-8">
-    <title>Make-Exam</title>
+    <title>add course</title>
 </head>
 <body>
-    <form>
-        
-    </form>
+<div th:replace="~{base :: csslinks}"></div>
+<div th:replace="~{base :: navbar}"></div>
+<div class="row main-content">
+    <div th:replace="~{base::leftsidebar}"></div>
+    <!--Content right-->
+    <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+        <form th:object="${exam}">
+
+
+
+        </form>
+    </div>
+</div>
 </body>
 </html>

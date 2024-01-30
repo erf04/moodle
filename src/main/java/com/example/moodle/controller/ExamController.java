@@ -29,6 +29,8 @@ public class ExamController {
     @Autowired
     private  ChoiceService choiceService;
 
+    @Autowired
+    private CoursePlanService coursePlanService;
 
     @GetMapping("/show-exam/{user_id}/{exam_id}/")
     public String showExam(@PathVariable("user_id") Long user_id, @PathVariable("exam_id")Long exam_id,
@@ -62,10 +64,12 @@ public class ExamController {
 
     }
 
-    @PostMapping("/make-exam")
-    public String makeExam(Model model){
+    @PostMapping("/{course_id}/make-exam")
+    public String makeExam(@PathVariable Long course_id, Model model){
+        List<CoursePlan> coursePlans = coursePlanService.findCoursePlanByID(course_id);
         Exam exam = new Exam();
-        model.addAttribute("make_exam",exam);
+        model.addAttribute("exam",exam);
+        model.addAttribute("coursePlan",coursePlans);
         return "make-exam";
     }
 
