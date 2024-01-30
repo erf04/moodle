@@ -144,6 +144,7 @@ public class CourseController {
                 }
             }
             if (!flag) model.addAttribute("booleanVar",false);
+
 //            boolean flag = false;
 //            for (int j=0; j<coursePlans.size(); j++) {
 //                if (coursePlans.get(j)==coursePlan) {
