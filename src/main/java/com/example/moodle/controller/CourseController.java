@@ -98,7 +98,6 @@ public class CourseController {
         }
     }
 
-
     @PostMapping("/searchCourse/{user_id}")
     public  String courseSearch(Model model,@RequestParam("searchedContent") String partialCourseName,@PathVariable("user_id") Long id){
         Account account=accountService.findByID(id);
@@ -123,6 +122,7 @@ public class CourseController {
         model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
         model.addAttribute("courseplan",coursePlan);
+        model.addAttribute("booleanVar",!coursePlans.isEmpty());
         if (account instanceof Teacher) {
             return "teacherCourseForm";
         }

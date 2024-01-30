@@ -5,6 +5,14 @@
     <title>Title</title>
 </head>
 <body>
+<div th:replace="~{base :: csslinks}"></div>
+<div th:replace="~{base :: navbar}"></div>
+<div class="row main-content">
+    <div th:replace="~{base::leftsidebar}"></div>
+    <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+
+    </div>
+</div>
 
 </body>
 </html>

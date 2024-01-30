@@ -86,9 +86,6 @@ public class ExamController {
         model.addAttribute("score",score);
         model.addAttribute("user",accountService.findByID(user_id));
         return "ExamResult";
-
-
-
     }
 
 
