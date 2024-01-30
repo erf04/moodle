@@ -64,6 +64,22 @@ public class ExamController {
 
     }
 
+    /*
+    @PostMapping("/add-question-to-exam/{exam_id}/{course_id}")
+    public String addQuestionToExam(@PathVariable Long exam_id,
+                                    @PathVariable Long course_id,
+                                    Model model){
+
+    }
+    */
+
+    @PostMapping("/save-exam/{exam_id}/{course_id}")
+    public String saveExam(@PathVariable Long exam_id,
+                           @PathVariable Long course_id,
+                           Model model){
+        //TODO
+    }
+
     @PostMapping("/{course_id}/make-exam")
     public String makeExam(@PathVariable Long course_id, Model model){
         List<CoursePlan> coursePlans = coursePlanService.findCoursePlanByID(course_id);

@@ -13,8 +13,7 @@
 <!--Content right-->
 
 <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-  <h5 class="mb-0" ><strong>Accordion</strong></h5>
-  <h1>helooooooooo</h1>
+  <h5 class="mb-0" >
   <form th:object="${course}" th:action="@{'/saveCourse/'+${user.getId()}}" method="post">
     <input type="hidden" name="user" th:value="${user}">
     <div class="form-group">

@@ -3,21 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>add course</title>
+    <title>add exam</title>
 </head>
 <body>
 <div th:replace="~{base :: csslinks}"></div>
 <div th:replace="~{base :: navbar}"></div>
 <div class="row main-content">
-    <div th:replace="~{base::leftsidebar}"></div>
-    <!--Content right-->
-    <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-        <form th:object="${exam}">
+<div th:replace="~{base::leftsidebar}"></div>
+<!--Content right-->
 
-
-
-        </form>
-    </div>
+<div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+    <form th:object="${exam}" th:action="@{'/save-exam/'+${exam.getId()} +'/' +${{course.getId()}}" method="post">
+        <input type="hidden" name="user" th:value="${user}">
+        <div class="form-group">
+            <label for="examName">name:</label>
+            <input type="text" class="form-control" id="examName" placeholder="Exam Name" th:field="*{title}"/>
+        </div>
+        <div class="form-group">
+            <label for="examTime">time:</label>
+            <input type="datetime-local" class="form-control" id="examTime" placeholder="Time" th:field="*{examTime}"/>
+        </div>
+        <!-- TODO(ADD QUESTIONS) -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 </div>
 </body>
 </html>
