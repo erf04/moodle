@@ -1,9 +1,7 @@
 package com.example.moodle.controller;
 
-import com.example.moodle.model.Account;
-import com.example.moodle.model.Admin;
-import com.example.moodle.model.Course;
-import com.example.moodle.model.CoursePlan;
+import com.example.moodle.model.*;
+import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.repository.CourseRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
@@ -25,6 +23,8 @@ public class CourseController {
     private AccountService accountService;
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private CoursePlanRepository coursePlanRepository;
     @Autowired
     private CoursePlanService coursePlanService;
 
@@ -58,7 +58,35 @@ public class CourseController {
         }
     }
 
+    @GetMapping("/addcourseplan/{user_id}")
+    public String showAddCoursePlan(@PathVariable Long user_id, Model model) {
+        Account user=accountService.findByID(user_id);
+        model.addAttribute("user",user);
+        if(user instanceof Teacher){
+            CoursePlan coursePlan=new CoursePlan();
+            model.addAttribute("coursePlan",coursePlan);
+            model.addAttribute("courses",courseRepository.findAll());
 
+            return "addCoursePlan";
+        }
+        else{
+            return "error500";
+        }
+
+
+    }
+    @PostMapping("/savecourseplan/{user_id}")
+    public  String courseplanSave(@ModelAttribute("courseplan") CoursePlan coursePlan,@PathVariable("user_id") Long id){
+        System.out.println(coursePlan.getName());
+        Account teacher= teacherService.findTeacherById(id);
+        if (teacher!=null){
+            coursePlanRepository.save(coursePlan);
+            return "redirect:/addcourseplan/"+id;
+        }
+        else{
+            return "error500";
+        }
+    }
 
 
     @PostMapping("/searchCourse/{user_id}")
@@ -75,4 +103,24 @@ public class CourseController {
         System.out.println(coursePlans.get(0));
         return "searched";
     }
+    @GetMapping("/seeCoursePlan/{user_id}/{course_id}")
+    public String seeCoursePlan(@PathVariable("course_id") long course_id,@PathVariable("user_id") long user_id,Model model){
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("courseplans",coursePlans);
+        Account account=accountService.findByID(user_id);
+        model.addAttribute("user",account);
+        CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
+        model.addAttribute("courseplan",coursePlan);
+        return "courseform";
+
+    }
+    @PostMapping("/courseplan/{coursePlanId}/{user_id}")
+    public String joinCoursePlan(@PathVariable("coursePlanId") Long coursePlanId, @PathVariable("user_id") long user_id) {
+        CoursePlan coursePlan = coursePlanRepository.getReferenceById(coursePlanId);
+        Account user= accountService.findByID(user_id);
+        coursePlan.getParticipants().add(user);
+        coursePlanRepository.save(coursePlan);
+        return "redirect:/home/"+user_id;
+    }
+
 }
