@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "accounts")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Account{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
