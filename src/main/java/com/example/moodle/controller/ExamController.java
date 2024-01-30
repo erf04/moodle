@@ -47,7 +47,7 @@ public class ExamController {
 
 
 
-    @GetMapping("/show-exam/{user_id}/{exam_id}/")
+    @GetMapping("/show-exam/{user_id}/{exam_id}")
     public String showExam(@PathVariable("user_id") Long user_id, @PathVariable("exam_id")Long exam_id,
                             Model model){
 
@@ -86,9 +86,6 @@ public class ExamController {
         model.addAttribute("score",score);
         model.addAttribute("user",accountService.findByID(user_id));
         return "ExamResult";
-
-
-
     }
 
 
@@ -143,13 +140,8 @@ public class ExamController {
         choice2.setQuestion(question);
         choice3.setQuestion(question);
         choice4.setQuestion(question);
-        choice1.setId(100L);
-        choice2.setId(101L);
-        choice3.setId(102L);
-        choice4.setId(104L);
         question.setChoices(List.of(choice1,choice2,choice3,choice4));
         exam.getQuestions().add(question);
-        question.setId(100L);
 
         if (correctChoice.equals("choice1")){
             question.getChoices().get(0).setCorrect(true);
@@ -191,6 +183,7 @@ public class ExamController {
         Teacher user=teacherService.findTeacherById(userId);
         List<Exam> exams=examService.findExamsByCreator(user);
         model.addAttribute("exams",exams);
+        model.addAttribute("user",user);
         return "showExams";
     }
 
