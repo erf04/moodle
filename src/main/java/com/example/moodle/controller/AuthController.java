@@ -46,7 +46,7 @@ public class AuthController {
     @PostMapping("/register/save")
     public String registration(@Validated @ModelAttribute("user") Account account,
                                BindingResult result,
-                               Model model){
+                               Model model,@RequestParam("role") String role){
         Account existingAccount= accountService.findByEmail(account.getEmail());
         if(existingAccount != null && existingAccount.getEmail() != null && !existingAccount.getEmail().isEmpty()){
             return "redirect:/register?fail";
@@ -60,8 +60,31 @@ public class AuthController {
             model.addAttribute("user", account);
             return "redirect:/register";
         }
-        accountService.save(account);
+//        account.getPerson().setId(account.getId());
+//        account.setId(account.getPerson().getId());
+//        accountService.save(account);
+        System.out.println(role);
+        if (role == null) {
+            model.addAttribute("roles", new String[] {"teacher", "student"});
+            return "registerform";
+        }
+
+        if (role.equals("teacher")) {
+            Teacher teacher = new Teacher();
+            teacher.setUserName(account.getUserName());
+            teacher.setEmail(account.getEmail());
+            teacher.setPassword(account.getPassword());
+            accountService.save(teacher);
+        } else {
+            Student student = new Student();
+            student.setUserName(account.getUserName());
+            student.setEmail(account.getEmail());
+            student.setPassword(account.getPassword());
+            accountService.save(student);
+        }
+
         return "redirect:/home/"+account.getId()+"?register=success";
+
     }
 
     @GetMapping("/")
@@ -80,6 +103,8 @@ public class AuthController {
         }
 //        Teacher findingTeacher=teacherService.findTeacherByUsernameAndPassword(username,password);
         return "redirect:/home/"+findingAccount.getId();
+
+
     }
 
     @GetMapping("/home/{user_id}")
