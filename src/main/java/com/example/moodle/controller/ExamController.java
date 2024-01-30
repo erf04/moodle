@@ -82,7 +82,7 @@ public class ExamController {
 
     @PostMapping("/{course_id}/make-exam")
     public String makeExam(@PathVariable Long course_id, Model model){
-        List<CoursePlan> coursePlans = coursePlanService.findCoursePlanByID(course_id);
+        CoursePlan coursePlans = coursePlanService.findCoursePlanByID(course_id);
         Exam exam = new Exam();
         model.addAttribute("exam",exam);
         model.addAttribute("coursePlan",coursePlans);

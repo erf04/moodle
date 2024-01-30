@@ -13,7 +13,7 @@
 <!--Content right-->
 
 <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-    <form th:object="${exam}" th:action="@{'/save-exam/'+${exam.getId()} +'/' +${{course.getId()}}" method="post">
+    <form th:object="${exam}" th:action="@{'/save-exam/'+${exam.getId()} +'/' +${{course.getId()}}}" method="post">
         <input type="hidden" name="user" th:value="${user}">
         <div class="form-group">
             <label for="examName">name:</label>

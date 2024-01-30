@@ -26,4 +26,9 @@ public class CoursePlanServiceImpl implements CoursePlanService {
         return coursePlanRepository.findCoursePlansByCreator(teacher);
 
     }
+
+    @Override
+    public CoursePlan findCoursePlanByID(Long id) {
+        return coursePlanRepository.getReferenceById(id);
+    }
 }
