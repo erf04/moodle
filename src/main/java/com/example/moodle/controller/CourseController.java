@@ -138,10 +138,10 @@ public class CourseController {
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
             boolean flag = false;
-            for (int j=0; j<coursePlans.size(); j++) {
-                if (coursePlans.get(j)==coursePlan) {
+            for (CoursePlan plan : coursePlans) {
+                if (plan == coursePlan) {
                     model.addAttribute("booleanVar", true);
-                    flag =true;
+                    flag = true;
                 }
             }
             if (!flag) model.addAttribute("booleanVar",false);
