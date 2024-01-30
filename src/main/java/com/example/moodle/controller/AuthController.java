@@ -1,9 +1,6 @@
 package com.example.moodle.controller;
 
-import com.example.moodle.model.Account;
-import com.example.moodle.model.CoursePlan;
-import com.example.moodle.model.Person;
-import com.example.moodle.model.Teacher;
+import com.example.moodle.model.*;
 import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
@@ -75,6 +72,11 @@ public class AuthController {
         List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
         model.addAttribute("user",account);
         model.addAttribute("courseplans",coursePlans);
-        return "userhome";
+        if(account instanceof Teacher)
+            return "teacherLogin";
+        else if (account instanceof Admin)
+            return "adminLogin";
+        else
+            return "userhome";
     }
 }
