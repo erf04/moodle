@@ -122,13 +122,13 @@ public class CourseController {
         model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
         model.addAttribute("courseplan",coursePlan);
-
         if (account instanceof Teacher) {
             model.addAttribute("booleanVar",false);
             return "teacherCourseForm";
         }
         else
         {
+            boolean booleanVar=!coursePlans.contains(coursePlan);
             List<Integer> examPlan = new ArrayList<>();
             for (int i = 0; i < coursePlan.getExams().size(); i++) {
                 if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account) == null) {
@@ -137,14 +137,15 @@ public class CourseController {
                 }
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
-            boolean flag = false;
-            for (int j=0; j<coursePlans.size(); j++) {
-                if (coursePlans.get(j)==coursePlan) {
-                    model.addAttribute("booleanVar", true);
-                    flag =true;
-                }
-            }
-            if (!flag) model.addAttribute("booleanVar",false);
+//            boolean flag = false;
+//            for (int j=0; j<coursePlans.size(); j++) {
+//                if (coursePlans.get(j)==coursePlan) {
+//                    model.addAttribute("booleanVar", booleanVar);
+//                    flag =true;
+//                }
+//            }
+//            if (!flag) model.addAttribute("booleanVar",false);
+            model.addAttribute("booleanVar",booleanVar);
             model.addAttribute("examPlans", examPlan);
             return "courseform";
         }
