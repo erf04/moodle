@@ -19,11 +19,11 @@
     <!--    style="width: 18rem; height:18rem"   -->
     <!--    <div class="d-flex justify-content-between">-->
     <div class="card mx-2 mt-3" style="width: 18rem; height: 25rem; border-radius: 8px;
-        box-shadow: 0px 0px 8px gray; background-color: #e1e1e1" th:each="courseplan: ${courseplans}">
+        box-shadow: 0px 0px 8px gray; background-color: #e1e1e1" th:each="search: ${searchedCoursePlans}">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvTpiEoQuOyj6WmKgNKUWkkw1Gus6slQe6YA&usqp=CAU" class="card-img-top mt-2" alt="...">
         <div class="card-body" style="text-align: center">
-            <h5 class="card-title" style="font-weight: bold" th:text="${courseplan.getCourse().getName()}"></h5>
-            <p class="card-text" style="font-weight: lighter" th:text="${courseplan.getCreator().getUserName()}"></p>
+            <h5 class="card-title" style="font-weight: bold" th:text="${search.getCourse().getName()}"></h5>
+            <p class="card-text" style="font-weight: lighter" th:text="${search.getCreator().getUserName()}"></p>
             <a href="#" class="btn btn-primary mt-1" style="margin-bottom: 15px;">See Course Info</a>
         </div>
     </div>
