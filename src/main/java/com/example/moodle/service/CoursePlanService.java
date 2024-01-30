@@ -15,4 +15,5 @@ public interface CoursePlanService {
 
     List<CoursePlan> findCoursePlansByTeacher(Teacher teacher);
     CoursePlan findCoursePlanByID(Long id);
+    CoursePlan save(CoursePlan coursePlan);
 }

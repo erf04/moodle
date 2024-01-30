@@ -11,7 +11,7 @@
 <div class="row main-content">
     <div th:replace="~{base::leftsidebar}"></div>
     <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-
+<form th:object="${user}" th:action="@{'/editprofile/'+${user.getId()}}">
         <section class="vh-100" style="background-color: #f4f5f7;">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -72,7 +72,8 @@
             </div>
         </section>
 
-        <center> <button type="button" class="btn btn-info" th:href="@{'/editprofile/'+${user.id}}">Edit</button> </center>
+        <center> <button type="submit" class="btn btn-info" >Edit</button> </center>
+</form>
     </div>
 
 </div>

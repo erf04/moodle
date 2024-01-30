@@ -15,4 +15,9 @@ public class ChoiceServiceImpl implements ChoiceService {
     public Choice findById(Long id) {
         return choiceRepository.getReferenceById(id);
     }
+
+    @Override
+    public Choice save(Choice choice) {
+        return choiceRepository.save(choice);
+    }
 }

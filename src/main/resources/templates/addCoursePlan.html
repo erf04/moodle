@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:extends="base.html">
+<html xmlns:th="http://www.thymeleaf.org" th:extends="baseTeacher.html">
 
 <head>
     <meta charset="UTF-8">
     <title>add course</title>
 </head>
 <body>
-<div th:replace="~{base :: csslinks}"></div>
-<div th:replace="~{base :: navbar}"></div>
+<div th:replace="~{baseTeacher :: csslinks}"></div>
+<div th:replace="~{baseTeacher :: navbar}"></div>
 <div class="row main-content">
-    <div th:replace="~{base::leftsidebar}"></div>
+    <div th:replace="~{baseTeacher::leftsidebar}"></div>
     <!--Content right-->
 
     <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
         <h5 class="mb-0" ><strong>Accordion</strong></h5>
-<<<<<<< HEAD
-=======
-        <h1>helooooooooo</h1>
->>>>>>> makeExam
+
         <form th:object="${coursePlan}" th:action="@{'/savecourseplan/'+${user.getId()}}" method="post">
             <input type="hidden" name="user" th:value="${user}">
             <div class="form-group">

@@ -12,4 +12,6 @@ public interface QuestionService {
     Question findById(Long id);
 
     Long findCorrectChoiceIdByQuestionID(Long id);
+
+    Question save(Question question);
 }

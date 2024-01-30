@@ -34,4 +34,9 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return 0L;
     }
+
+    @Override
+    public Question save(Question question) {
+        return questionRepository.save(question);
+    }
 }
