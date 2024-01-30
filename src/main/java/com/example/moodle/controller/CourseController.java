@@ -60,8 +60,6 @@ public class CourseController {
     }
 
 
-
-
     @PostMapping("/searchCourse/{user_id}")
     public  String courseSearch(Model model,@RequestParam("searchedContent") String partialCourseName,@PathVariable("user_id") Long id){
         Account account=accountService.findByID(id);
