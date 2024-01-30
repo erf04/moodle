@@ -107,6 +107,8 @@ public class CourseController {
     }
     @GetMapping("/seeCoursePlan/{user_id}/{course_id}")
     public String seeCoursePlan(@PathVariable("course_id") long course_id,@PathVariable("user_id") long user_id,Model model){
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("courseplans",coursePlans);
         Account account=accountService.findByID(user_id);
         model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
