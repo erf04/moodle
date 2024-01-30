@@ -25,6 +25,9 @@ public class AuthController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private CoursePlanRepository coursePlanRepository;
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         Account account =new Account();
@@ -81,10 +84,13 @@ public class AuthController {
         List<CoursePlan> coursePlans = accountService.findCoursePlansByAccountId(user_id);
         model.addAttribute("user", account);
         model.addAttribute("courseplans", coursePlans);
+
 //        for (CoursePlan coursePlan : coursePlans)
 //            System.out.println(coursePlan.getCourse().getName() + "    " + coursePlan.getCourse().getId());
         if (account instanceof Teacher){
             //System.out.println("TEACHER ACCOUNT");
+            List<CoursePlan> myCoursePlans = coursePlanRepository.findCoursePlansByCreator((Teacher) account);
+            model.addAttribute("myCourses", myCoursePlans);
             return "teacherLogin";
     }
         else if (account instanceof Admin) {

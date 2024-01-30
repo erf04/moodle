@@ -120,18 +120,22 @@ public class CourseController {
         model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
         model.addAttribute("courseplan",coursePlan);
-        List<Integer> examPlan = new ArrayList<>();
-        for (int i=0; i<coursePlan.getExams().size(); i++)
-        {
-            if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i),account )== null)
-            {
-                examPlan.add(-1);
-                continue;
-            }
-            examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i),account )).getScore());
+        if (account instanceof Teacher) {
+            return "teacherCourseForm";
         }
-        model.addAttribute("examPlans",examPlan);
-        return "courseform";
+        else
+        {
+            List<Integer> examPlan = new ArrayList<>();
+            for (int i = 0; i < coursePlan.getExams().size(); i++) {
+                if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account) == null) {
+                    examPlan.add(-1);
+                    continue;
+                }
+                examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
+            }
+            model.addAttribute("examPlans", examPlan);
+            return "courseform";
+        }
 
     }
     @PostMapping("/courseplan/{coursePlanId}/{user_id}")
