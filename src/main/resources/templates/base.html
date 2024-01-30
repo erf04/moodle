@@ -166,7 +166,7 @@
 
                 <!--Search box and avatar-->
                 <div class="col-sm-8 col-4 text-right flex-header-menu justify-content-end">
-                    <form class="search-rounded mr-3" method="post" th:action="@{/searchCourse}">
+                    <form class="search-rounded mr-3" method="post" th:action="@{'/searchCourse/'+${user.getId()}}">
                         <input type="text" class="form-control search-box" placeholder="Search" name="searchedContent" />
                     </form>
                     <div class="mr-4">
@@ -211,6 +211,14 @@
                             <span class="none">Course <i class="fa fa-angle-down pull-right align-bottom"></i></span>
                         </a>
                         <ul class="children" id="dashboard" th:each="courseplan: ${courseplans}">
+                            <li class="child"><a href="index.html" class="ml-4"><i class="fa fa-angle-right mr-2" th:text="${courseplan.getCourse().getName()}"> </i><p class="fa fa-angle-right mr-2" th:text="${courseplan.getCreator().getUserName()}"> </p></a></li>
+                        </ul>
+                    </li>
+                    <li class="parent">
+                        <a href="#" onclick="toggle_menu('dashboard'); return false" class=""><i class="fa fa-dashboard mr-3"> </i>
+                            <span class="none">Exam <i class="fa fa-angle-down pull-right align-bottom"></i></span>
+                        </a>
+                        <ul class="children" th:each="courseplan: ${courseplans}">
                             <li class="child"><a href="index.html" class="ml-4"><i class="fa fa-angle-right mr-2" th:text="${courseplan.getCourse().getName()}"> </i><p class="fa fa-angle-right mr-2" th:text="${courseplan.getCreator().getUserName()}"> </p></a></li>
                         </ul>
                     </li>

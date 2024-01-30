@@ -14,13 +14,15 @@ public class ExamPlan {
     private int score;
     private LocalDateTime attendingDate;
 
-    @ManyToMany
-    @JoinTable(
-            name = "examPlan_account",
-            joinColumns = @JoinColumn(name = "examPlan_id"),
-            inverseJoinColumns = @JoinColumn(name = "account_id")
-    )
-    private List<Account> accounts;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Account account;
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     @ManyToOne
     private Exam exam;
@@ -57,11 +59,4 @@ public class ExamPlan {
         this.attendingDate = attendingDate;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
 }

@@ -3,9 +3,11 @@ package com.example.moodle.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "accounts")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Account{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +29,7 @@ public class Account{
     @ManyToMany(mappedBy = "participants")
     private List<CoursePlan> attendedCoursePlans;
 
-    @ManyToMany(mappedBy = "accounts")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "account")
     private List<ExamPlan> examPlans;
 
     public List<ExamPlan> getExamPlans() {
@@ -38,17 +40,29 @@ public class Account{
         this.examPlans = examPlans;
     }
 
-    public List<SubmittedAnswer> getSubmittedAnswers() {
+
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "submitter")
+    @ElementCollection
+    private Map<Long,Long> submittedAnswers;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "submitter")
+    private List<SubmittedAnswer> userSubmittedAnswers;
+
+    public List<SubmittedAnswer> getUserSubmittedAnswers() {
+        return userSubmittedAnswers;
+    }
+
+    public void setUserSubmittedAnswers(List<SubmittedAnswer> userSubmittedAnswers) {
+        this.userSubmittedAnswers = userSubmittedAnswers;
+    }
+
+    public Map<Long, Long> getSubmittedAnswers() {
         return submittedAnswers;
     }
 
-    public void setSubmittedAnswers(List<SubmittedAnswer> submittedAnswers) {
+    public void setSubmittedAnswers(Map<Long, Long> submittedAnswers) {
         this.submittedAnswers = submittedAnswers;
     }
-
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "submitter")
-    private List<SubmittedAnswer> submittedAnswers;
-
 
     public String getEmail() {
         return email;

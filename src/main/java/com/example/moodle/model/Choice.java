@@ -2,6 +2,8 @@ package com.example.moodle.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "choices")
 public class Choice {
@@ -47,4 +49,14 @@ public class Choice {
     private Question question;
     private boolean isCorrect;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "userChoice")
+    private List<SubmittedAnswer> submittedAnswer;
+
+    public List<SubmittedAnswer> getSubmittedAnswer() {
+        return submittedAnswer;
+    }
+
+    public void setSubmittedAnswer(List<SubmittedAnswer> submittedAnswer) {
+        this.submittedAnswer = submittedAnswer;
+    }
 }

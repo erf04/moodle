@@ -62,5 +62,12 @@ public class ExamController {
 
     }
 
+    @PostMapping("/make-exam")
+    public String makeExam(Model model){
+        Exam exam = new Exam();
+        model.addAttribute("make_exam",exam);
+        return "make-exam";
+    }
+
 
 }
