@@ -128,7 +128,7 @@ public class CourseController {
         }
         else
         {
-            boolean booleanVar=!coursePlans.contains(coursePlan);
+            boolean booleanVar=coursePlans.contains(coursePlan);
             List<Integer> examPlan = new ArrayList<>();
             for (int i = 0; i < coursePlan.getExams().size(); i++) {
                 if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account) == null) {
