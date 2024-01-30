@@ -10,7 +10,7 @@
 <div class="row main-content">
     <div th:replace="~{baseTeacher::leftsidebar}"></div>
     <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-        <div class="card" style="width: 18rem;" th:each="exam:${exams}">
+        <div class="card col-md-4" style="width: 18rem;" th:each="exam:${exams}">
             <div class="card-body">
                 <h5 class="card-title" th:text="${exam.title}"></h5>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="${exam.examTime}"></h6>
