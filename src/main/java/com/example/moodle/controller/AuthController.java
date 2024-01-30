@@ -45,15 +45,16 @@ public class AuthController {
 
     @PostMapping("/register/save")
     public String registration(@Validated @ModelAttribute("user") Account account,
+                               @RequestParam("role") String role,
                                BindingResult result,
-                               Model model,@RequestParam("role") String role){
+                               Model model){
         Account existingAccount= accountService.findByEmail(account.getEmail());
         if(existingAccount != null && existingAccount.getEmail() != null && !existingAccount.getEmail().isEmpty()){
             return "redirect:/register?fail";
         }
 
         Account existingUsername=accountService.findByUsername(account.getUserName());
-        if (existingUsername!=null && existingUsername.getUserName()!=null && !existingAccount.getUserName().isEmpty()){
+        if (existingUsername!=null && existingUsername.getUserName()!=null && !existingUsername.getUserName().isEmpty()){
             return "redirect:/register?fail";
         }
         if(result.hasErrors()){
@@ -75,15 +76,15 @@ public class AuthController {
             teacher.setEmail(account.getEmail());
             teacher.setPassword(account.getPassword());
             accountService.save(teacher);
+            return "redirect:/home/"+teacher.getId()+"?register=success";
         } else {
-            Student student = new Student();
+            Account student = new Student();
             student.setUserName(account.getUserName());
             student.setEmail(account.getEmail());
             student.setPassword(account.getPassword());
             accountService.save(student);
+            return "redirect:/home/"+student.getId()+"?register=success";
         }
-
-        return "redirect:/home/"+account.getId()+"?register=success";
 
     }
 
