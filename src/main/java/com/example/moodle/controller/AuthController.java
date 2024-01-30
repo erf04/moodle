@@ -29,6 +29,8 @@ public class AuthController {
 
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private CoursePlanRepository coursePlanRepository;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
@@ -106,6 +108,9 @@ public class AuthController {
     public String profile(@PathVariable long user_id,Model model){
         Account account=accountService.findByID(user_id);
         List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        if(account instanceof Teacher){
+            model.addAttribute("created",coursePlanRepository.findCoursePlansByCreator((Teacher) account));
+        }
         System.out.println(coursePlans.isEmpty());
         model.addAttribute("user",account);
         model.addAttribute("courseplans",coursePlans);
@@ -117,4 +122,14 @@ public class AuthController {
         model.addAttribute("user",accountService.findByID(user_id));
         return "editprofile";
     }
+    @PostMapping("/saveprofile/{user_id}")
+    public String saveprof(@PathVariable long user_id,@ModelAttribute Account user){
+        Account user1 =accountService.findByID(user_id);
+        user1.setEmail(user.getEmail());
+        user1.setUserName(user.getUserName());
+        user1.setPassword(user.getPassword());
+        accountService.save(user1);
+        return "redirect:/editprofile/"+user_id;
+    }
+
 }
