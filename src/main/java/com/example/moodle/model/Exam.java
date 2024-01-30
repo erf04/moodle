@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+
 @Entity
 @Table(name = "exams")
 public class Exam {
@@ -30,6 +32,16 @@ public class Exam {
 
     private LocalDateTime examTime;
 
+    public Map<Long, Choice> getSelectedChoiceIds() {
+        return selectedChoiceIds;
+    }
+
+    public void setSelectedChoiceIds(Map<Long, Choice> selectedChoiceIds) {
+        this.selectedChoiceIds = selectedChoiceIds;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Map<Long, Choice> selectedChoiceIds;
     public LocalDateTime getExamTime() {
         return examTime;
     }

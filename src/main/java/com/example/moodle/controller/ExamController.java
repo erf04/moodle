@@ -3,6 +3,7 @@ package com.example.moodle.controller;
 import com.example.moodle.model.*;
 import com.example.moodle.repository.ChoiceRepository;
 import com.example.moodle.repository.CoursePlanRepository;
+import com.example.moodle.repository.ExamPlanRepository;
 import com.example.moodle.repository.PersonRepository;
 import com.example.moodle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ExamController {
@@ -29,6 +31,12 @@ public class ExamController {
     @Autowired
     private  ChoiceService choiceService;
 
+    @Autowired
+    private SubmittedAnswerService submittedAnswerService;
+
+    @Autowired
+    private ExamPlanRepository examPlanRepository;
+
 
     @GetMapping("/show-exam/{user_id}/{exam_id}/")
     public String showExam(@PathVariable("user_id") Long user_id, @PathVariable("exam_id")Long exam_id,
@@ -36,8 +44,10 @@ public class ExamController {
 
         Account account=accountService.findByID(user_id);
         List<Question> questions=questionService.findByExamID(exam_id);
-        model.addAttribute("questions",questions);
+        Exam exam=examService.findExamById(exam_id);
+//        model.addAttribute("questions",questions);
         model.addAttribute("user",account);
+        model.addAttribute("exam",exam);
         return "exam";
 
     }
@@ -45,20 +55,30 @@ public class ExamController {
     @PostMapping("/submit-exam/{user_id}/{exam_id}")
     public String submitExam(@PathVariable("user_id") Long user_id,
                                  @PathVariable("exam_id") Long exam_id,
-                                 @RequestBody List<Long> selectedAnswerIds,
+                                 @ModelAttribute Account account,
                                  Model model){
 
-        Exam exam=examService.findExamById(exam_id);
-//        Choice choice= choiceService.findById(choice_id)
-        System.out.println(selectedAnswerIds.size());
-        for(Long choiceId:selectedAnswerIds){
-            System.out.println(choiceId);
+        Account user=accountService.findByID(user_id);
+        Exam exam= examService.findExamById(exam_id);
+        for (Map.Entry<Long,Long> map:account.getSubmittedAnswers().entrySet()){
+            SubmittedAnswer submittedAnswer=new SubmittedAnswer();
+            submittedAnswer.setUserChoice(choiceService.findById(map.getValue()));
+            submittedAnswer.setQuestion(questionService.findById(map.getKey()));
+            submittedAnswer.setSubmitter(user);
+            submittedAnswerService.save(submittedAnswer);
         }
-//        SubmittedAnswer submittedAnswer=new SubmittedAnswer();
-//        submittedAnswer.setQuestion(question);
-//        submittedAnswer.setSubmitter(accountService.findByID(user_id));
-//        submittedAnswer.setUserChoice(choice);
-        return "redirect:/show-exam/"+user_id+"/"+exam_id+"/";
+        ExamPlan examPlan=new ExamPlan();
+        examPlan.setExam(exam);
+        examPlan.setAccount(user);
+        int score=examService.calculateScore(account.getSubmittedAnswers());
+        examPlan.setScore(score);
+        examPlan.setAttendingDate(LocalDateTime.now());
+        examPlanRepository.save(examPlan);
+        model.addAttribute("score",score);
+        model.addAttribute("user",accountService.findByID(user_id));
+        return "ExamResult";
+
+
 
     }
 
