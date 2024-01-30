@@ -108,9 +108,9 @@ public class CourseController {
         System.out.println(partialCourseName);
         List<Course> courses=courseRepository.findAllByNameContaining(partialCourseName);
         List<CoursePlan> coursePlansNew=new ArrayList<>();
-
-        //FOR ERFAN (ADD FIND COURSE BY NAME IN COURSE SERVICE AND INSERT IT IN THE CODE)
-        //todo
+        for (Course course:courses){
+            coursePlansNew.addAll(coursePlanService.findByCourse(course));
+        }
         model.addAttribute("searchedCoursePlans",coursePlansNew);
         System.out.println(coursePlans.get(0));
         return "searched";
