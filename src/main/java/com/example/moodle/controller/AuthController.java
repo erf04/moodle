@@ -60,6 +60,7 @@ public class AuthController {
             return "redirect:/register";
         }
         account.getPerson().setId(account.getId());
+        account.setId(account.getPerson().getId());
         accountService.save(account);
         return "redirect:/home/"+account.getId()+"?register=success";
     }
