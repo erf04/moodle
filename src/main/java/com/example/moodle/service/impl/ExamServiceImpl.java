@@ -1,14 +1,15 @@
 package com.example.moodle.service.impl;
 
-import com.example.moodle.model.Choice;
 import com.example.moodle.model.Exam;
 import com.example.moodle.model.Question;
+import com.example.moodle.model.Teacher;
 import com.example.moodle.repository.ExamRepository;
 import com.example.moodle.service.ExamService;
 import com.example.moodle.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -43,5 +44,10 @@ public class ExamServiceImpl implements ExamService {
         }
         return result;
 
+    }
+
+    @Override
+    public List<Exam> findExamsByCreator(Teacher teacher) {
+        return examRepository.findAllByCreator(teacher);
     }
 }

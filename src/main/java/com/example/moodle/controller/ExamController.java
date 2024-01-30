@@ -7,11 +7,13 @@ import com.example.moodle.repository.ExamPlanRepository;
 import com.example.moodle.repository.PersonRepository;
 import com.example.moodle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +41,9 @@ public class ExamController {
 
     @Autowired
     private CoursePlanService coursePlanService;
+
+    @Autowired
+    private TeacherService teacherService;
 
 
 
@@ -86,30 +91,107 @@ public class ExamController {
 
     }
 
-    /*
-    @PostMapping("/add-question-to-exam/{exam_id}/{course_id}")
-    public String addQuestionToExam(@PathVariable Long exam_id,
-                                    @PathVariable Long course_id,
-                                    Model model){
 
-    }
-    */
 
-    @PostMapping("/save-exam/{exam_id}/{course_id}")
-    public String saveExam(@PathVariable Long exam_id,
-                           @PathVariable Long course_id,
+    @PostMapping("/save-exam/{user_id}/{course_id}")
+    public String saveExam(@PathVariable("user_id")Long userId,@PathVariable("course_id") Long course_id,
+                           @ModelAttribute Exam exam,
                            Model model){
-        //TODO
-        return "sagi";
+        CoursePlan coursePlan=coursePlanService.findCoursePlanByID(course_id);
+        exam.setCoursePlan(coursePlan);
+        exam.setCreator(teacherService.findTeacherById(userId));
+        examService.save(exam);
+        Question question=new Question();
+        model.addAttribute("coursePlan",coursePlan);
+        model.addAttribute("question",question);
+        model.addAttribute("examId",exam.getId());
+        model.addAttribute("user",exam.getCreator());
+        return "addquestion";
     }
 
-    @PostMapping("/{course_id}/make-exam")
-    public String makeExam(@PathVariable Long course_id, Model model){
+    @GetMapping("/make-exam/{course_id}/{user_id}")
+    public String makeExam(@PathVariable("course_id") Long course_id, Model model,@PathVariable("user_id") Long user_id){
         CoursePlan coursePlans = coursePlanService.findCoursePlanByID(course_id);
+        Teacher user=teacherService.findTeacherById(user_id);
         Exam exam = new Exam();
+        exam.setCreator(user);
         model.addAttribute("exam",exam);
         model.addAttribute("coursePlan",coursePlans);
+        model.addAttribute("user",user);
         return "make-exam";
+    }
+
+    @PostMapping("add-question/{exam_id}")
+    public String addQuestion(@PathVariable("exam_id") Long examId,
+            @RequestParam("choice1") String choiceContent1,
+            @RequestParam("choice2") String choiceContent2,
+            @RequestParam("choice3") String choiceContent3,
+            @RequestParam("choice4") String choiceContent4
+            ,@RequestParam("correctChoice") String correctChoice
+            ,@ModelAttribute Question question){
+
+        Exam exam=examService.findExamById(examId);
+        Choice choice1=new Choice();
+        Choice choice2=new Choice();
+        Choice choice3=new Choice();
+        Choice choice4=new Choice();
+        choice1.setText(choiceContent1);
+        choice2.setText(choiceContent2);
+        choice3.setText(choiceContent3);
+        choice4.setText(choiceContent4);
+        choice1.setQuestion(question);
+        choice2.setQuestion(question);
+        choice3.setQuestion(question);
+        choice4.setQuestion(question);
+        choice1.setId(100L);
+        choice2.setId(101L);
+        choice3.setId(102L);
+        choice4.setId(104L);
+        question.setChoices(List.of(choice1,choice2,choice3,choice4));
+        exam.getQuestions().add(question);
+        question.setId(100L);
+
+        if (correctChoice.equals("choice1")){
+            question.getChoices().get(0).setCorrect(true);
+            question.getChoices().get(1).setCorrect(false);
+            question.getChoices().get(2).setCorrect(false);
+            question.getChoices().get(3).setCorrect(false);
+
+        }
+        else if (correctChoice.equals("choice2")){
+            question.getChoices().get(1).setCorrect(true);
+            question.getChoices().get(0).setCorrect(false);
+            question.getChoices().get(2).setCorrect(false);
+            question.getChoices().get(3).setCorrect(false);
+
+        }
+        else if (correctChoice.equals("choice3")){
+            question.getChoices().get(2).setCorrect(true);
+            question.getChoices().get(0).setCorrect(false);
+            question.getChoices().get(1).setCorrect(false);
+            question.getChoices().get(2).setCorrect(false);
+
+        }
+        else if (correctChoice.equals("choice4")){
+            question.getChoices().get(3).setCorrect(true);
+            question.getChoices().get(0).setCorrect(false);
+            question.getChoices().get(1).setCorrect(false);
+            question.getChoices().get(2).setCorrect(false);
+
+        }
+        questionService.save(question);
+        exam.getQuestions().add(question);
+        examService.save(exam);
+        Long id=exam.getCreator().getId();
+        return "redirect:/show-exams/"+id;
+    }
+
+    @GetMapping("show-exams/{user_id}")
+    public String showExams(@PathVariable("user_id") Long userId,Model model){
+        Teacher user=teacherService.findTeacherById(userId);
+        List<Exam> exams=examService.findExamsByCreator(user);
+        model.addAttribute("exams",exams);
+        return "showExams";
     }
 
 

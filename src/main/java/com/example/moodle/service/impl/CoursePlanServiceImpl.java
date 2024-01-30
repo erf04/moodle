@@ -29,4 +29,9 @@ public class CoursePlanServiceImpl implements CoursePlanService {
     public CoursePlan findCoursePlanByID(Long id) {
         return coursePlanRepository.getReferenceById(id);
     }
+
+    @Override
+    public CoursePlan save(CoursePlan coursePlan) {
+        return coursePlanRepository.save(coursePlan);
+    }
 }
