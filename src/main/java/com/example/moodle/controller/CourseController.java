@@ -89,6 +89,7 @@ public class CourseController {
         System.out.println(coursePlan.getName());
         Account teacher= teacherService.findTeacherById(id);
         if (teacher!=null){
+            coursePlan.setCreator(teacher);
             coursePlanRepository.save(coursePlan);
             return "redirect:/addcourseplan/"+id;
         }
