@@ -116,19 +116,25 @@ public class CourseController {
     }
     @GetMapping("/seeCoursePlan/{user_id}/{course_id}")
     public String seeCoursePlan(@PathVariable("course_id") long course_id,@PathVariable("user_id") long user_id,Model model){
-        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
-        model.addAttribute("courseplans",coursePlans);
         Account account=accountService.findByID(user_id);
-        model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
-        model.addAttribute("courseplan",coursePlan);
-        if (account instanceof Teacher) {
-            model.addAttribute("booleanVar",false);
+        if (account instanceof Teacher){
+        List<CoursePlan> coursePlans=coursePlanRepository.findCoursePlansByCreator((Teacher) account);
+        if(coursePlans.contains(coursePlan)) {
             return "teacherCourseForm";
+        }
+        }
+
+        model.addAttribute("user",account);
+        model.addAttribute("courseplan",coursePlan);
+        if (coursePlan.getParticipants().contains(account)) {
+            model.addAttribute("booleanVar",true);
+            return "courseform";
         }
         else
         {
-            boolean booleanVar=coursePlans.contains(coursePlan);
+
+            List<CoursePlan> coursePlans=account.getAttendedCoursePlans();
             List<Integer> examPlan = new ArrayList<>();
             for (int i = 0; i < coursePlan.getExams().size(); i++) {
                 if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account) == null) {
@@ -138,24 +144,7 @@ public class CourseController {
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
 
-            boolean flag = false;
-            for (CoursePlan plan : coursePlans) {
-                if (plan == coursePlan) {
-                    model.addAttribute("booleanVar", true);
-                    flag = true;
-                }
-            }
-            if (!flag) model.addAttribute("booleanVar",false);
-
-//            boolean flag = false;
-//            for (int j=0; j<coursePlans.size(); j++) {
-//                if (coursePlans.get(j)==coursePlan) {
-//                    model.addAttribute("booleanVar", booleanVar);
-//                    flag =true;
-//                }
-//            }
-//            if (!flag) model.addAttribute("booleanVar",false);
-            model.addAttribute("booleanVar",booleanVar);
+            model.addAttribute("booleanVar",false);
 
             model.addAttribute("examPlans", examPlan);
             return "courseform";

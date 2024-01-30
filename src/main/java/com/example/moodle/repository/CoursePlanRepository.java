@@ -15,5 +15,6 @@ public interface CoursePlanRepository extends JpaRepository<CoursePlan,Long> {
     List<CoursePlan> findCoursePlansByCourse(Course course);
 
     List<CoursePlan> findCoursePlansByCreator(Teacher teacher);
+    CoursePlan findCoursePlanById(long id);
 
 }
