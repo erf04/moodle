@@ -79,4 +79,20 @@ public class AuthController {
         else
             return "userhome";
     }
+
+    @GetMapping("/profile/{user_id}")
+    public String profile(@PathVariable long user_id,Model model){
+        Account account=accountService.findByID(user_id);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        System.out.println(coursePlans.isEmpty());
+        model.addAttribute("user",account);
+        model.addAttribute("courseplans",coursePlans);
+        return "profile";
+    }
+
+    @GetMapping("/editprofile/{user_id}")
+    public String editprof(@PathVariable long user_id,Model model){
+        model.addAttribute("user",accountService.findByID(user_id));
+        return "editprofile";
+    }
 }
