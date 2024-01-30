@@ -122,8 +122,9 @@ public class CourseController {
         model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
         model.addAttribute("courseplan",coursePlan);
-        model.addAttribute("booleanVar",!coursePlans.isEmpty());
+
         if (account instanceof Teacher) {
+            model.addAttribute("booleanVar",false);
             return "teacherCourseForm";
         }
         else
@@ -136,11 +137,21 @@ public class CourseController {
                 }
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
+            boolean flag = false;
+            for (int j=0; j<coursePlans.size(); j++) {
+                if (coursePlans.get(j)==coursePlan) {
+                    model.addAttribute("booleanVar", true);
+                    flag =true;
+                }
+            }
+            if (!flag) model.addAttribute("booleanVar",false);
             model.addAttribute("examPlans", examPlan);
             return "courseform";
         }
 
     }
+
+
     @PostMapping("/courseplan/{coursePlanId}/{user_id}")
     public String joinCoursePlan(@PathVariable("coursePlanId") Long coursePlanId, @PathVariable("user_id") long user_id) {
         CoursePlan coursePlan = coursePlanRepository.getReferenceById(coursePlanId);

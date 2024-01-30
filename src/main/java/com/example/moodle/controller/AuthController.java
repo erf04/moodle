@@ -80,8 +80,6 @@ public class AuthController {
         }
 //        Teacher findingTeacher=teacherService.findTeacherByUsernameAndPassword(username,password);
         return "redirect:/home/"+findingAccount.getId();
-
-
     }
 
     @GetMapping("/home/{user_id}")
