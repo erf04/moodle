@@ -37,6 +37,10 @@ public class ExamController {
     @Autowired
     private ExamPlanRepository examPlanRepository;
 
+    @Autowired
+    private CoursePlanService coursePlanService;
+
+
 
     @GetMapping("/show-exam/{user_id}/{exam_id}/")
     public String showExam(@PathVariable("user_id") Long user_id, @PathVariable("exam_id")Long exam_id,
@@ -80,6 +84,32 @@ public class ExamController {
 
 
 
+    }
+
+    /*
+    @PostMapping("/add-question-to-exam/{exam_id}/{course_id}")
+    public String addQuestionToExam(@PathVariable Long exam_id,
+                                    @PathVariable Long course_id,
+                                    Model model){
+
+    }
+    */
+
+    @PostMapping("/save-exam/{exam_id}/{course_id}")
+    public String saveExam(@PathVariable Long exam_id,
+                           @PathVariable Long course_id,
+                           Model model){
+        //TODO
+        return "sagi";
+    }
+
+    @PostMapping("/{course_id}/make-exam")
+    public String makeExam(@PathVariable Long course_id, Model model){
+        CoursePlan coursePlans = coursePlanService.findCoursePlanByID(course_id);
+        Exam exam = new Exam();
+        model.addAttribute("exam",exam);
+        model.addAttribute("coursePlan",coursePlans);
+        return "make-exam";
     }
 
 

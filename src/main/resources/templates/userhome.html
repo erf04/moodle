@@ -24,7 +24,11 @@
         <div class="card-body" style="text-align: center">
             <h5 class="card-title" style="font-weight: bold" th:text="${courseplan.getCourse().getName()}"></h5>
             <p class="card-text" style="font-weight: lighter" th:text="${courseplan.getCreator().getUserName()}"></p>
+<<<<<<< HEAD
             <a th:href="@{'/seeCoursePlan/'+${user.getId()}+'/'+${courseplan.getId()}}" class="btn btn-primary mt-1" style="margin-bottom: 15px;">See Course Info</a>
+=======
+            <a th:href="@{'/seeCoursePlan/'+${user.getId()}}" class="btn btn-primary mt-1" style="margin-bottom: 15px;">See Course Info</a>
+>>>>>>> makeExam
         </div>
     </div>
 <!--    </div>-->
