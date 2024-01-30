@@ -63,6 +63,16 @@
             </li>
         </ul>
     </div>
+    <div class="card mx-2 mt-3" style="width: 18rem; height: 25rem; border-radius: 8px;
+        box-shadow: 0px 0px 8px gray; background-color: #e1e1e1" >
+        <h1 style="font-weight: bolder">Results</h1>
+        <ul class="list-group" th:each="examplan : *{examPlans}">
+            <li class="list-group-item active">
+                <p th:if="${examplan}== -1 ">Not participated!</p>
+                <p th:unless="true" th:text="${examplan}"></p>
+            </li>
+        </ul>
+    </div>
     <!--    </div>-->
     <!--Content right-->
     <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
