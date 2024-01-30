@@ -80,16 +80,24 @@ public class AuthController {
     }
 
     @GetMapping("/home/{user_id}")
-    public String home(@PathVariable Long user_id,Model model){
-        Account account=accountService.findByID(user_id);
-        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
-        model.addAttribute("user",account);
-        model.addAttribute("courseplans",coursePlans);
-        if(account instanceof Teacher)
+    public String home(@PathVariable Long user_id,Model model) {
+        Account account = accountService.findByID(user_id);
+        List<CoursePlan> coursePlans = accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("user", account);
+        model.addAttribute("courseplans", coursePlans);
+//        for (CoursePlan coursePlan : coursePlans)
+//            System.out.println(coursePlan.getCourse().getName() + "    " + coursePlan.getCourse().getId());
+        if (account instanceof Teacher){
+            //System.out.println("TEACHER ACCOUNT");
             return "teacherLogin";
-        else if (account instanceof Admin)
+    }
+        else if (account instanceof Admin) {
+            //System.out.println("ADMIN ACCOUNT");
             return "adminLogin";
-        else
+        }
+        else {
+            //System.out.println("REGULAR ACCOUNT");
             return "userhome";
+        }
     }
 }
