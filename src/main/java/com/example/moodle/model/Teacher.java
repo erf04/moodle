@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Teacher extends Account{
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 
@@ -35,7 +35,7 @@ public class Teacher extends Account{
 
     @Override
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     @Override

@@ -3,10 +3,14 @@ package com.example.moodle.controller;
 import com.example.moodle.model.*;
 import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.repository.CourseRepository;
+import com.example.moodle.repository.ExamPlanRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
 
+import com.example.moodle.service.ExamService;
 import com.example.moodle.service.TeacherService;
+import com.example.moodle.service.impl.ExamServiceImpl;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -27,9 +31,14 @@ public class CourseController {
     private CoursePlanRepository coursePlanRepository;
     @Autowired
     private CoursePlanService coursePlanService;
-
+    @Autowired
+    private ExamService examService;
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private ExamPlanRepository examPlanRepository;
+
     @GetMapping("/addcourse/{user_id}")
     public String showAddCourse(@PathVariable Long user_id, Model model) {
         Account user=accountService.findByID(user_id);
@@ -37,7 +46,6 @@ public class CourseController {
         if(user instanceof Admin){
             Course course=new Course();
             model.addAttribute("course",course);
-
             return "addCourse";
         }
         else{
@@ -98,9 +106,10 @@ public class CourseController {
         model.addAttribute("courseplans",coursePlans);
         System.out.println(partialCourseName);
         List<Course> courses=courseRepository.findAllByNameContaining(partialCourseName);
+        List<CoursePlan> coursePlansNew=new ArrayList<>();
+
         //FOR ERFAN (ADD FIND COURSE BY NAME IN COURSE SERVICE AND INSERT IT IN THE CODE)
         //todo
-        List<CoursePlan> coursePlansNew=new ArrayList<>();
         model.addAttribute("searchedCoursePlans",coursePlansNew);
         System.out.println(coursePlans.get(0));
         return "searched";
@@ -113,6 +122,17 @@ public class CourseController {
         model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
         model.addAttribute("courseplan",coursePlan);
+        List<Integer> examPlan = new ArrayList<>();
+        for (int i=0; i<coursePlan.getExams().size(); i++)
+        {
+            if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i),account )== null)
+            {
+                examPlan.add(-1);
+                continue;
+            }
+            examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i),account )).getScore());
+        }
+        model.addAttribute("examPlans",examPlan);
         return "courseform";
 
     }

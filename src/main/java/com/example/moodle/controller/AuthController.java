@@ -1,9 +1,15 @@
 package com.example.moodle.controller;
 
+
 import com.example.moodle.model.*;
+import com.example.moodle.model.Account;
+import com.example.moodle.model.CoursePlan;
+import com.example.moodle.model.Person;
+import com.example.moodle.model.Teacher;
 import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
+import com.example.moodle.service.TeacherService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +26,9 @@ public class AuthController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
@@ -47,7 +56,6 @@ public class AuthController {
             model.addAttribute("user", account);
             return "redirect:/register";
         }
-
         accountService.save(account);
         return "redirect:/home/"+account.getId()+"?register=success";
     }
@@ -63,21 +71,35 @@ public class AuthController {
         if (findingAccount==null){
             return "redirect:/login?fail";
         }
+        if (findingAccount.getId()!=null){
+            return "redirect:/home/"+findingAccount.getId();
+        }
+//        Teacher findingTeacher=teacherService.findTeacherByUsernameAndPassword(username,password);
         return "redirect:/home/"+findingAccount.getId();
+
+
     }
 
     @GetMapping("/home/{user_id}")
-    public String home(@PathVariable Long user_id,Model model){
-        Account account=accountService.findByID(user_id);
-        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
-        model.addAttribute("user",account);
-        model.addAttribute("courseplans",coursePlans);
-        if(account instanceof Teacher)
+    public String home(@PathVariable Long user_id,Model model) {
+        Account account = accountService.findByID(user_id);
+        List<CoursePlan> coursePlans = accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("user", account);
+        model.addAttribute("courseplans", coursePlans);
+//        for (CoursePlan coursePlan : coursePlans)
+//            System.out.println(coursePlan.getCourse().getName() + "    " + coursePlan.getCourse().getId());
+        if (account instanceof Teacher){
+            //System.out.println("TEACHER ACCOUNT");
             return "teacherLogin";
-        else if (account instanceof Admin)
+    }
+        else if (account instanceof Admin) {
+            //System.out.println("ADMIN ACCOUNT");
             return "adminLogin";
-        else
+        }
+        else {
+            //System.out.println("REGULAR ACCOUNT");
             return "userhome";
+        }
     }
 
     @GetMapping("/profile/{user_id}")
