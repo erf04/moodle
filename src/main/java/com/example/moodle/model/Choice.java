@@ -47,4 +47,14 @@ public class Choice {
     private Question question;
     private boolean isCorrect;
 
+    @OneToOne
+    private SubmittedAnswer submittedAnswer;
+
+    public SubmittedAnswer getSubmittedAnswer() {
+        return submittedAnswer;
+    }
+
+    public void setSubmittedAnswer(SubmittedAnswer submittedAnswer) {
+        this.submittedAnswer = submittedAnswer;
+    }
 }
