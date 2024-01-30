@@ -21,4 +21,5 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher findTeacherByUsernameAndPassword(String username, String password) {
         return teacherRepository.findTeacherByUserNameAndPassword(username,password);
     }
+
 }

@@ -18,12 +18,15 @@ public class CoursePlanServiceImpl implements CoursePlanService {
     private CoursePlanRepository coursePlanRepository;
 
     @Override
-
     public List<CoursePlan> findByCourse(Course course) {
         return coursePlanRepository.findCoursePlansByCourse(course);
     }
     public List<CoursePlan> findCoursePlansByTeacher(Teacher teacher) {
         return coursePlanRepository.findCoursePlansByCreator(teacher);
 
+    }
+    @Override
+    public CoursePlan findCoursePlanByID(Long id) {
+        return coursePlanRepository.getReferenceById(id);
     }
 }

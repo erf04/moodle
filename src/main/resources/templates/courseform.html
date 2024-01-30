@@ -5,9 +5,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Add specific page CSS and JS files here if needed -->
     <style>
+<<<<<<< HEAD
         /*.card {*/
         /*    margin: 10px;*/
         /*}*/
+=======
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        p {
+            margin: 0;
+            margin-top: 5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .sagi::before {
+            content: "__________________ ";
+            color: black;
+            font-weight: bold;
+            position: relative;
+            bottom: 6px;
+        }
+
+        .sagi::after {
+            content: " __________________";
+            color: black;
+            font-weight: bold;
+            position: relative;
+            bottom: 6px;
+        }
+
+>>>>>>> makeExam
     </style>
 </head>
 <body>
@@ -42,6 +77,132 @@
 
 <!-- Page JavaScript Files-->
 <div th:replace="~{base :: jslinks}"></div>
+<<<<<<< HEAD
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+=======
+
+<div style="color: #5a6268 ;width: 100%; height: 25px">
+
+</div>
+<div class="container d-flex py-2 justify-content-between">
+    <div>
+        <h2 style="color: #3c3cda; margin-top: 5px;margin-left: 20px">Exams</h2>
+        <div
+                style="
+            width: 400px;
+            height: auto;
+            background-color: whitesmoke;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            border-top: 3px solid blue;
+          "
+        >
+            <div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#">Exams</a>
+                    <!--  th:each="courseExam : ${course.getExams()}" -->
+                    <div>
+                        <!--  th:text="${courseExam.getTitle()}" -->
+                        <p></p>
+                        <!-- th:text ="${courseExam.getExamTime()}" -->
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#">exam name</a>
+                    <div>
+                        <p>2 soal</p>
+                        <p>date</p>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+    <div>
+        <h2 style="color: #ef3f3f; margin-left: 20px">Lessons <\></h2>
+        <div
+                style="
+            width: 400px;
+            height: auto;
+            background-color: whitesmoke;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            border-top: 3px solid red;
+          "
+        >
+            <div></div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h2 style="color: #3A87ADFF; margin-left: 20px">Class Information</h2>
+            <div
+                    style="
+              width: 400px;
+              height: auto;
+              background-color: whitesmoke;
+              margin: 5px;
+              padding: 5px;
+              border-radius: 5px;
+              border: 1px solid gray;
+              border-top: 3px solid aqua;
+            "
+            >
+                <div class="names" style="text-align: center">
+                    <h2 style="margin-top: 5px">Lesson Name</h2>
+                    <p>teacher</p>
+                    <div class="graders">
+                        <p class="mt-2 sagi">graders</p>
+                        <p>hasan</p>
+                        <p>aram</p>
+                        <p>erfan</p>
+                        <p>yasin</p>
+                        <p>sedighe</p>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between px-5">
+                        <div style="align-items: center">
+                            <h1 style="color: #3a87ad">21</h1>
+                            <h3>members</h3>
+                        </div>
+                        <div style="align-items: center">
+                            <h1 style="color: #1e7e34">5</h1>
+                            <h3>texts</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2 style="color: #ec9f1d; margin-left: 20px"># Important Texts</h2>
+            <div
+                    style="
+              width: 400px;
+              height: auto;
+              background-color: whitesmoke;
+              margin: 5px;
+              padding: 5px;
+              border-radius: 5px;
+              border: 1px solid gray;
+              border-top: 3px solid #e79200;
+            "
+            ></div>
+        </div>
+    </div>
+</div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+></script>
+>>>>>>> makeExam
 </body>
 </html>

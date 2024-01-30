@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface TeacherService {
      Teacher findTeacherById(Long id);
+
      Teacher findTeacherByUsernameAndPassword(String username,String password);
 
 }
