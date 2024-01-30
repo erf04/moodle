@@ -10,7 +10,7 @@ public class SubmittedAnswer {
     @ManyToOne
     Account submitter;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "submittedAnswer")
+    @ManyToOne
     private Choice userChoice;
 
     @ManyToOne

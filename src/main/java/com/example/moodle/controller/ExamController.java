@@ -62,7 +62,6 @@ public class ExamController {
         Exam exam= examService.findExamById(exam_id);
         for (Map.Entry<Long,Long> map:account.getSubmittedAnswers().entrySet()){
             SubmittedAnswer submittedAnswer=new SubmittedAnswer();
-            System.out.println("id:"+map.getValue()+" , "+"choice: "+choiceService.findById(map.getValue()));
             submittedAnswer.setUserChoice(choiceService.findById(map.getValue()));
             submittedAnswer.setQuestion(questionService.findById(map.getKey()));
             submittedAnswer.setSubmitter(user);
