@@ -69,12 +69,8 @@ public class AuthController {
         if (findingAccount.getId()!=null){
             return "redirect:/home/"+findingAccount.getId();
         }
-//        System.out.println(findingAccount.getId());
-        Teacher findingTeacher=teacherService.findTeacherByUsernameAndPassword(username,password);
-//        System.out.println(findingTeacher.getUserName()+"-"+findingTeacher.getPerson());
-        Teacher finding2=teacherService.findTeacherById(402L);
-        System.out.println(finding2);
-        return "redirect:/home/"+findingTeacher.getId();
+//        Teacher findingTeacher=teacherService.findTeacherByUsernameAndPassword(username,password);
+        return "redirect:/home/"+findingAccount.getId();
 
 
     }

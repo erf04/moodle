@@ -35,7 +35,7 @@ public class Teacher extends Account{
 
     @Override
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     @Override
