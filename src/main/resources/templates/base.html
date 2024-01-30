@@ -76,7 +76,11 @@
                         <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" th:href="@{'/profile/'+${user.getId()}}"><i class="fa fa-user pr-2"></i> Profile</a>
                             <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" th:if="booleanVar == true" th:href="@{'/courseplan/'+${courseplan.getId()}+'/'+${user.getId()}}"><i class="fa fa-user pr-2"></i> Profile</a>
+                            <div class="dropdown-divider" th:if="booleanVar == true"></div>
                             <a class="dropdown-item" th:href="@{'/'}"><i class="fa fa-power-off pr-2"></i> Logout</a>
+
                         </div>
                     </div>
                 </div>
@@ -108,7 +112,6 @@
                         </a>
                         <ul class="children" id="dashboard" th:each="courseplan: ${courseplans}">
                             <li class="child"><a th:href="@{'/seeCoursePlan/'+${user.getId()}+'/'+${courseplan.getId()}}" class="ml-4"><i class="fa fa-angle-right mr-2" th:text="${courseplan.getCourse().getName()}"> </i><p class="fa fa-angle-right mr-2" th:text="${courseplan.getCreator().getUserName()}"> </p></a></li>
-                            <li class="child" th:if="booleanVar == true"><a th:href="@{'/courseplan/'+${courseplan.getId()}+'/'+${user.getId()}}" class="ml-4"><i class="fa fa-angle-right mr-2" >join this course</i></a></li>
                         </ul>
                     </li>
                 </ul>

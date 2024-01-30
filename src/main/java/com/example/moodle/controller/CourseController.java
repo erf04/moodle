@@ -137,6 +137,16 @@ public class CourseController {
                 }
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
+<<<<<<< HEAD
+            boolean flag = false;
+            for (CoursePlan plan : coursePlans) {
+                if (plan == coursePlan) {
+                    model.addAttribute("booleanVar", true);
+                    flag = true;
+                }
+            }
+            if (!flag) model.addAttribute("booleanVar",false);
+=======
 //            boolean flag = false;
 //            for (int j=0; j<coursePlans.size(); j++) {
 //                if (coursePlans.get(j)==coursePlan) {
@@ -146,6 +156,7 @@ public class CourseController {
 //            }
 //            if (!flag) model.addAttribute("booleanVar",false);
             model.addAttribute("booleanVar",booleanVar);
+>>>>>>> cd012c9805607a1cd914969b3bdb3fd033048b71
             model.addAttribute("examPlans", examPlan);
             return "courseform";
         }
