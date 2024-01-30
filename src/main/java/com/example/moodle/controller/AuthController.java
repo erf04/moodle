@@ -7,6 +7,7 @@ import com.example.moodle.model.Teacher;
 import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
+import com.example.moodle.service.TeacherService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,9 @@ public class AuthController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
@@ -50,7 +54,6 @@ public class AuthController {
             model.addAttribute("user", account);
             return "redirect:/register";
         }
-
         accountService.save(account);
         return "redirect:/home/"+account.getId()+"?register=success";
     }
@@ -66,7 +69,17 @@ public class AuthController {
         if (findingAccount==null){
             return "redirect:/login?fail";
         }
-        return "redirect:/home/"+findingAccount.getId();
+        if (findingAccount.getId()!=null){
+            return "redirect:/home/"+findingAccount.getId();
+        }
+//        System.out.println(findingAccount.getId());
+        Teacher findingTeacher=teacherService.findTeacherByUsernameAndPassword(username,password);
+//        System.out.println(findingTeacher.getUserName()+"-"+findingTeacher.getPerson());
+        Teacher finding2=teacherService.findTeacherById(402L);
+        System.out.println(finding2);
+        return "redirect:/home/"+findingTeacher.getId();
+
+
     }
 
     @GetMapping("/home/{user_id}")

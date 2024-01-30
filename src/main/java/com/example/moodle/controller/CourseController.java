@@ -37,7 +37,6 @@ public class CourseController {
         if(user instanceof Admin){
             Course course=new Course();
             model.addAttribute("course",course);
-
             return "addCourse";
         }
         else{
@@ -70,9 +69,8 @@ public class CourseController {
         model.addAttribute("courseplans",coursePlans);
         System.out.println(partialCourseName);
         List<Course> courses=courseRepository.findAllByNameContaining(partialCourseName);
-        //FOR ERFAN (ADD FIND COURSE BY NAME IN COURSE SERVICE AND INSERT IT IN THE CODE)
-        //todo
         List<CoursePlan> coursePlansNew=new ArrayList<>();
+
         model.addAttribute("searchedCoursePlans",coursePlansNew);
         System.out.println(coursePlans.get(0));
         return "searched";
