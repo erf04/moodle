@@ -131,8 +131,8 @@ public class CourseController {
             model.addAttribute("booleanVar",true);
             return "courseform";
         }
-        else
-        {
+        else{model.addAttribute("booleanVar",false);}
+
 
             List<CoursePlan> coursePlans=account.getAttendedCoursePlans();
             List<Integer> examPlan = new ArrayList<>();
@@ -144,11 +144,11 @@ public class CourseController {
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
 
-            model.addAttribute("booleanVar",false);
+
 
             model.addAttribute("examPlans", examPlan);
             return "courseform";
-        }
+
 
     }
 
