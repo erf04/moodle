@@ -176,7 +176,7 @@ public class ExamController {
             question.getChoices().get(2).setCorrect(false);
 
         }
-        questionService.save(question);
+//        questionService.save(question);
         exam.getQuestions().add(question);
         examService.save(exam);
         Long id=exam.getCreator().getId();
@@ -204,7 +204,7 @@ public class ExamController {
 
         Account account=accountService.findByID(user_id);
         Exam exam=examService.findExamById(exam_id);
-        model.addAttribute("user",account);
+        model.addAttribute("user",account);model.addAttribute("courseplan",exam.getCoursePlan());
         model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(user_id));
         if (account instanceof Teacher){
 //            List<ExamPlan> examPlans=examPlanRepository.findAllByExam(exam);
@@ -216,7 +216,4 @@ public class ExamController {
         }
 
     }
-
-
-
 }
