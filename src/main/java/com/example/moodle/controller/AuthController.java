@@ -6,6 +6,7 @@ import com.example.moodle.model.Account;
 import com.example.moodle.model.CoursePlan;
 import com.example.moodle.model.Teacher;
 import com.example.moodle.repository.CoursePlanRepository;
+import com.example.moodle.repository.CourseRepository;
 import com.example.moodle.service.AccountService;
 import com.example.moodle.service.CoursePlanService;
 import com.example.moodle.service.TeacherService;
@@ -30,6 +31,9 @@ public class AuthController {
     private TeacherService teacherService;
     @Autowired
     private CoursePlanRepository coursePlanRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
 
 
@@ -122,6 +126,9 @@ public class AuthController {
     }
         else if (account instanceof Admin) {
             //System.out.println("ADMIN ACCOUNT");
+            List<Course> courses=courseRepository.findAll();
+            System.out.println(courses.size());
+            model.addAttribute("courses",courses);
             return "adminLogin";
         }
         else {

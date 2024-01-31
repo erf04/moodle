@@ -29,11 +29,16 @@
   </div>
   <!--    </div>-->
   <!--Content right-->
-  <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-
+  <div class="col-sm-9 col-xs-12 content pt-3 pl-0 row" >
+    <div class="card col-md-4" style="width: 18rem;height: 10rem" th:each="course :${courses}">
+      <div class="card-body">
+        <h5 class="card-title" th:text="${course.getName()}"></h5>
+        <h6 class="card-subtitle mb-2 text-muted" th:text="${course.getCoursePlans().size()} +' instance created'"></h6>
+      </div>
+    </div>
   </div>
 </div>
-</div>
+
 
 <div th:replace="~{baseAdmin :: footer}"></div>
 

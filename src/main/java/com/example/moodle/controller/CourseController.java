@@ -59,7 +59,7 @@ public class CourseController {
         Account teacher= teacherService.findTeacherById(id);
         if (teacher!=null){
             courseRepository.save(course);
-            return "redirect:/addcourse/"+id;
+            return "redirect:/home/"+id;
         }
         else{
             return "error500";
