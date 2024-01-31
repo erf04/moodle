@@ -146,7 +146,6 @@ public class ExamController {
         choice3.setQuestion(question);
         choice4.setQuestion(question);
         question.setChoices(List.of(choice1,choice2,choice3,choice4));
-        exam.getQuestions().add(question);
 
         if (correctChoice.equals("choice1")){
             question.getChoices().get(0).setCorrect(true);
