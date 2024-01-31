@@ -1,19 +1,14 @@
 package com.example.moodle.controller;
 
 import com.example.moodle.model.*;
-import com.example.moodle.repository.ChoiceRepository;
-import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.repository.ExamPlanRepository;
-import com.example.moodle.repository.PersonRepository;
 import com.example.moodle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

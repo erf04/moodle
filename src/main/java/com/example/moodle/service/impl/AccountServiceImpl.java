@@ -2,7 +2,6 @@ package com.example.moodle.service.impl;
 
 import com.example.moodle.model.Account;
 import com.example.moodle.model.CoursePlan;
-import com.example.moodle.model.Person;
 import com.example.moodle.repository.AccountRepository;
 import com.example.moodle.repository.CoursePlanRepository;
 import com.example.moodle.service.AccountService;
@@ -41,10 +40,6 @@ public class AccountServiceImpl implements AccountService {
             // Handle the case when either Account or CoursePlan is not found
             // (throw an exception, log a message, etc.)
         }
-    }
-    @Override
-    public List<Account> findAllByPerson(Person person) {
-        return accountRepository.findAllByPerson(person);
     }
 
     @Override
