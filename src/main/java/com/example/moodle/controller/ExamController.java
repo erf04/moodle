@@ -63,7 +63,7 @@ public class ExamController {
                                  @PathVariable("exam_id") Long exam_id,
                                  @ModelAttribute Account account,
                                  Model model){
-
+    try{
         Account user=accountService.findByID(user_id);
         Exam exam= examService.findExamById(exam_id);
         for (Map.Entry<Long,Long> map:account.getSubmittedAnswers().entrySet()){
@@ -86,6 +86,11 @@ public class ExamController {
         model.addAttribute("courseplans",coursePlans);
         model.addAttribute("courseplan",exam.getCoursePlan());
         return "userexamresult";
+    }catch (Exception e){
+        return "twoAttend";
+    }
+
+
     }
 
 
