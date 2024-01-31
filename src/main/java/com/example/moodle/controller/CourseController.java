@@ -75,14 +75,11 @@ public class CourseController {
             CoursePlan coursePlan=new CoursePlan();
             model.addAttribute("coursePlan",coursePlan);
             model.addAttribute("courses",courseRepository.findAll());
-
             return "addCoursePlan";
         }
         else{
             return "error500";
         }
-
-
     }
     @PostMapping("/savecourseplan/{user_id}")
     public  String courseplanSave(@ModelAttribute("courseplan") CoursePlan coursePlan,@PathVariable("user_id") Long id){
@@ -107,11 +104,12 @@ public class CourseController {
         System.out.println(partialCourseName);
         List<Course> courses=courseRepository.findAllByNameContaining(partialCourseName);
         List<CoursePlan> coursePlansNew=new ArrayList<>();
-        for (Course course:courses){
-            coursePlansNew.addAll(coursePlanService.findByCourse(course));
+        if (courses.size()>0) {
+            for (Course course : courses) {
+                coursePlansNew.addAll(coursePlanService.findByCourse(course));
+            }
         }
         model.addAttribute("searchedCoursePlans",coursePlansNew);
-        System.out.println(coursePlans.get(0));
         return "searched";
     }
     @GetMapping("/seeCoursePlan/{user_id}/{course_id}")

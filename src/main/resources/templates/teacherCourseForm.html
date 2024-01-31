@@ -24,7 +24,7 @@
         <div class="card-body" style="text-align: center">
             <h5 class="card-title" style="font-weight: bold" th:text="${exam.getTitle()}"></h5>
             <p class="card-text" style="font-weight: lighter" th:text="${exam.getExamTime()}"></p>
-            <a th:href="@{'/seeExamResult/'+${user.getId()}+'/'+${courseplan.getId()}+${exam.getId()}}" class="btn btn-primary mt-1" style="margin-bottom: 15px;">See Exam Results</a>
+            <a th:href="@{'/seeExamResult/'+${user.getId()}+'/'+${exam.getId()}}" class="btn btn-primary mt-1" style="margin-bottom: 15px;">See Exam Results</a>
         </div>
     </div>
     <!--    </div>-->
