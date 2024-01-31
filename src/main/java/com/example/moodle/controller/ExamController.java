@@ -50,7 +50,9 @@ public class ExamController {
         List<Question> questions=questionService.findByExamID(exam_id);
         Exam exam=examService.findExamById(exam_id);
 //        model.addAttribute("questions",questions);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
         model.addAttribute("user",account);
+        model.addAttribute("courseplans",coursePlans);
         model.addAttribute("exam",exam);
         return "exam";
 
@@ -79,7 +81,9 @@ public class ExamController {
         examPlan.setAttendingDate(LocalDateTime.now());
         examPlanRepository.save(examPlan);
         model.addAttribute("score",score);
-        model.addAttribute("user",accountService.findByID(user_id));
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("user",account);
+        model.addAttribute("courseplans",coursePlans);
         return "ExamResult";
     }
 
@@ -97,6 +101,8 @@ public class ExamController {
         model.addAttribute("coursePlan",coursePlan);
         model.addAttribute("question",question);
         model.addAttribute("examId",exam.getId());
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(userId);
+        model.addAttribute("courseplans",coursePlans);
         model.addAttribute("user",exam.getCreator());
         return "addquestion";
     }
@@ -109,6 +115,9 @@ public class ExamController {
         exam.setCreator(user);
         model.addAttribute("exam",exam);
         model.addAttribute("coursePlan",coursePlans);
+        Account account=accountService.findByID(user_id);
+        List<CoursePlan> coursePlanss=accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("courseplans",coursePlanss);
         model.addAttribute("user",user);
         return "make-exam";
     }
@@ -120,7 +129,8 @@ public class ExamController {
             @RequestParam("choice3") String choiceContent3,
             @RequestParam("choice4") String choiceContent4
             ,@RequestParam("correctChoice") String correctChoice
-            ,@ModelAttribute Question question){
+            ,@ModelAttribute Question question,
+                              Model model){
 
         Exam exam=examService.findExamById(examId);
         Choice choice1=new Choice();
@@ -170,6 +180,10 @@ public class ExamController {
         exam.getQuestions().add(question);
         examService.save(exam);
         Long id=exam.getCreator().getId();
+        Account account=accountService.findByID(id);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(id);
+        model.addAttribute("user",account);
+        model.addAttribute("courseplans",coursePlans);
         return "redirect:/show-exams/"+id;
     }
 
@@ -179,6 +193,8 @@ public class ExamController {
         List<Exam> exams=examService.findExamsByCreator(user);
         model.addAttribute("exams",exams);
         model.addAttribute("user",user);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(userId);
+        model.addAttribute("courseplans",coursePlans);
         return "showExams";
     }
 

@@ -87,7 +87,7 @@ public class CourseController {
     }
     @PostMapping("/savecourseplan/{user_id}")
     public  String courseplanSave(@ModelAttribute("courseplan") CoursePlan coursePlan,@PathVariable("user_id") Long id,Model model){
-        System.out.println(coursePlan.getName());
+
         Account teacher= teacherService.findTeacherById(id);
         model.addAttribute("user",teacher);
         model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(id));

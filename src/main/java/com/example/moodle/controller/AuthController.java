@@ -152,7 +152,10 @@ public class AuthController {
 
     @GetMapping("/editprofile/{user_id}")
     public String editprof(@PathVariable long user_id,Model model){
-        model.addAttribute("user",accountService.findByID(user_id));
+        Account account=accountService.findByID(user_id);
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+        model.addAttribute("user",account);
+        model.addAttribute("courseplans",coursePlans);
         return "editprofile";
     }
     @PostMapping("/saveprofile/{user_id}")
