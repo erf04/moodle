@@ -121,11 +121,14 @@ public class CourseController {
     public String seeCoursePlan(@PathVariable("course_id") long course_id,@PathVariable("user_id") long user_id,Model model){
         Account account=accountService.findByID(user_id);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
+
         if (account instanceof Teacher){
         List<CoursePlan> coursePlans=coursePlanRepository.findCoursePlansByCreator((Teacher) account);
         if(coursePlans.contains(coursePlan)) {
+            model.addAttribute("user",account);
+            model.addAttribute("courseplan",coursePlan);
             return "teacherCourseForm";
-        }
+            }
         }
 
         model.addAttribute("user",account);
