@@ -175,7 +175,7 @@ public class ExamController {
             question.getChoices().get(2).setCorrect(false);
 
         }
-//        questionService.save(question);
+        questionService.save(question);
         exam.getQuestions().add(question);
         examService.save(exam);
         Long id=exam.getCreator().getId();
