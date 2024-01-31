@@ -84,7 +84,7 @@
     </div>
     <!--    </div>-->
     <!--Content right-->
-    <form>
+    <form th:action="@{'/joincourseplan/'+${courseplan.id}+'/'+${user.id}}">
         <div th:if="${booleanVar} == false" >
         <button type="submit">Join</button>
     </div>
