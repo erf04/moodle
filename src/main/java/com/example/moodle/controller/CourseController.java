@@ -101,7 +101,6 @@ public class CourseController {
         List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(id);
         model.addAttribute("user",account);
         model.addAttribute("courseplans",coursePlans);
-        System.out.println(partialCourseName);
         List<Course> courses=courseRepository.findAllByNameContaining(partialCourseName);
         List<CoursePlan> coursePlansNew=new ArrayList<>();
         if (courses.size()>0) {
