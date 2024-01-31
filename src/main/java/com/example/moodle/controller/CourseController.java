@@ -159,7 +159,7 @@ public class CourseController {
     }
 
 
-    @PostMapping("/courseplan/{coursePlanId}/{user_id}")
+    @GetMapping("/joincourseplan/{coursePlanId}/{user_id}")
     public String joinCoursePlan(@PathVariable("coursePlanId") Long coursePlanId, @PathVariable("user_id") long user_id,Model model) {
         CoursePlan coursePlan = coursePlanRepository.getReferenceById(coursePlanId);
         Account user= accountService.findByID(user_id);
@@ -169,5 +169,6 @@ public class CourseController {
         model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(user_id));
         return "redirect:/home/"+user_id;
     }
+
 
 }
