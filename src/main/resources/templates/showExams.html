@@ -15,7 +15,7 @@
                 <h5 class="card-title" th:text="${exam.title}"></h5>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="${exam.examTime}"></h6>
                 <p class="card-text" th:text="${exam.questions.size()} + ' questions'"></p>
-                <a class="card-link" th:href="@{'/addquestion/'+${exam.getId()}}">add a question</a>
+                <a class="card-link" th:href="@{'/add-question/'+${exam.getId()}}">add a question</a>
                 <a class="card-link" th:href="@{'/show-exam/'+${user.getId()}+'/'+${exam.getId()}}">show exam</a>
             </div>
         </div>
