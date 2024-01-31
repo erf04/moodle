@@ -182,5 +182,25 @@ public class ExamController {
         return "showExams";
     }
 
+    @GetMapping("seeExamResult/{user_id}/{exam_id}")
+    public String findExamResultsForTeacher(@PathVariable("user_id") Long user_id,
+                                            @PathVariable("exam_id") Long exam_id,Model model){
+
+        Account account=accountService.findByID(user_id);
+        Exam exam=examService.findExamById(exam_id);
+        model.addAttribute("user",account);
+        model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(user_id));
+        if (account instanceof Teacher){
+//            List<ExamPlan> examPlans=examPlanRepository.findAllByExam(exam);
+            model.addAttribute("exam",exam);
+            return "teacherResults";
+        }
+        else{
+            return "error500";
+        }
+
+    }
+
+
 
 }

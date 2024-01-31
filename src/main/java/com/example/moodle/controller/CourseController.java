@@ -42,6 +42,7 @@ public class CourseController {
     public String showAddCourse(@PathVariable Long user_id, Model model) {
         Account user=accountService.findByID(user_id);
         model.addAttribute("user",user);
+        model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(user_id));
         if(user instanceof Admin){
             Course course=new Course();
             model.addAttribute("course",course);
@@ -54,9 +55,11 @@ public class CourseController {
 
     }
     @PostMapping("/saveCourse/{user_id}")
-    public  String courseSave(@ModelAttribute("course") Course course,@PathVariable("user_id") Long id){
-        System.out.println(course.getName());
+    public  String courseSave(@ModelAttribute("course") Course course,@PathVariable("user_id") Long id,Model model){
+//        System.out.println(course.getName());
         Account teacher= teacherService.findTeacherById(id);
+        model.addAttribute("user",teacher);
+        model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(id));
         if (teacher!=null){
             courseRepository.save(course);
             return "redirect:/home/"+id;
@@ -70,6 +73,7 @@ public class CourseController {
     public String showAddCoursePlan(@PathVariable Long user_id, Model model) {
         Account user=accountService.findByID(user_id);
         model.addAttribute("user",user);
+        model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(user_id));
         if(user instanceof Teacher){
             CoursePlan coursePlan=new CoursePlan();
             model.addAttribute("coursePlan",coursePlan);
@@ -84,9 +88,11 @@ public class CourseController {
 
     }
     @PostMapping("/savecourseplan/{user_id}")
-    public  String courseplanSave(@ModelAttribute("courseplan") CoursePlan coursePlan,@PathVariable("user_id") Long id){
+    public  String courseplanSave(@ModelAttribute("courseplan") CoursePlan coursePlan,@PathVariable("user_id") Long id,Model model){
         System.out.println(coursePlan.getName());
         Account teacher= teacherService.findTeacherById(id);
+        model.addAttribute("user",teacher);
+        model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(id));
         if (teacher!=null){
             coursePlan.setCreator(teacher);
             coursePlanRepository.save(coursePlan);
@@ -162,11 +168,13 @@ public class CourseController {
 
 
     @PostMapping("/courseplan/{coursePlanId}/{user_id}")
-    public String joinCoursePlan(@PathVariable("coursePlanId") Long coursePlanId, @PathVariable("user_id") long user_id) {
+    public String joinCoursePlan(@PathVariable("coursePlanId") Long coursePlanId, @PathVariable("user_id") long user_id,Model model) {
         CoursePlan coursePlan = coursePlanRepository.getReferenceById(coursePlanId);
         Account user= accountService.findByID(user_id);
         coursePlan.getParticipants().add(user);
         coursePlanRepository.save(coursePlan);
+        model.addAttribute("user",user);
+        model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(user_id));
         return "redirect:/home/"+user_id;
     }
 
