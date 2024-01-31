@@ -57,7 +57,7 @@
         <h1 style="font-weight: bolder">Exams</h1>
         <ul class="list-group" th:each="courseExam : *{courseplan.getExams()}">
             <li class="list-group-item active">
-                <p th:href="@{'/show-exam/'+${user.getId()}+'/'+${courseExam.getId()}}" th:text="*{courseExam.getTitle()}"></p>
+                <a th:href="@{'/show-exam/'+${user.getId()}+'/'+${courseExam.getId()}}"><p th:text="*{courseExam.getTitle()}"></p></a>
                 <p th:text="*{courseExam.getExamTime()}"></p>
             </li>
         </ul>
