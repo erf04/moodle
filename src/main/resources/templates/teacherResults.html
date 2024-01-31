@@ -18,14 +18,15 @@
     <div th:replace="~{baseAddCoursePlan::leftsidebar}"></div>
     <!--    style="width: 18rem; height:18rem"   -->
     <!--    <div class="d-flex justify-content-between">-->
-    <ul class="list-group list-group-flush" th:each="examPlan: ${exam.getExamPlans()}">
-        <li class="list-group-item" th:text="${examPlan.getAccount().getUserName()}+':'+${examPlan.getScore()}" ></li>
-    </ul>
+
 
     <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+        <ul class="list-group list-group-flush" th:each="examPlan: ${exam.getExamPlans()}">
+            <li class="list-group-item" th:text="${examPlan.getAccount().getUserName()}+':'+${examPlan.getScore()}" ></li>
+        </ul>
     </div>
 </div>
-</div>
+
 
 <div th:replace="~{baseAddCoursePlan :: footer}"></div>
 <!--Page Wrapper-->
