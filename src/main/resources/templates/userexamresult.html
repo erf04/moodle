@@ -19,6 +19,7 @@
     <div class="card-body">
         <h5 class="card-title">Success </h5>
         <p class="card-text" th:text="${score}"></p>
+        <a th:href="@{'/home/'+${user.getId()}}" th:text="'go to home'"><i></i></a>
     </div>
 </div>
         </center>
