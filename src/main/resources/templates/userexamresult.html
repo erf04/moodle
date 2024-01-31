@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" th:extends="baseAdmin.html">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>add course</title>
 </head>
 <body>
+<div th:replace="~{baseAdmin :: csslinks}"></div>
+<div th:replace="~{baseAdmin :: navbar}"></div>
+<div class="row main-content">
+    <div th:replace="~{baseAdmin::leftsidebar}"></div>
+    <!--Content right-->
 
+    <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+        <center>
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+    <div class="card-header">ur Score</div>
+    <div class="card-body">
+        <h5 class="card-title">Success </h5>
+        <p class="card-text" th:text="${score}"></p>
+    </div>
+</div>
+        </center>
+
+    </div>
+</div>
 </body>
+
 </html>
