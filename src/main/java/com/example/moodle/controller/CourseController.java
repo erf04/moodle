@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
 public class CourseController {
     @Autowired
@@ -78,14 +79,11 @@ public class CourseController {
             CoursePlan coursePlan=new CoursePlan();
             model.addAttribute("coursePlan",coursePlan);
             model.addAttribute("courses",courseRepository.findAll());
-
             return "addCoursePlan";
         }
         else{
             return "error500";
         }
-
-
     }
     @PostMapping("/savecourseplan/{user_id}")
     public  String courseplanSave(@ModelAttribute("courseplan") CoursePlan coursePlan,@PathVariable("user_id") Long id,Model model){
@@ -109,31 +107,37 @@ public class CourseController {
         List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(id);
         model.addAttribute("user",account);
         model.addAttribute("courseplans",coursePlans);
-        System.out.println(partialCourseName);
         List<Course> courses=courseRepository.findAllByNameContaining(partialCourseName);
         List<CoursePlan> coursePlansNew=new ArrayList<>();
-        for (Course course:courses){
-            coursePlansNew.addAll(coursePlanService.findByCourse(course));
+        if (courses.size()>0) {
+            for (Course course : courses) {
+                coursePlansNew.addAll(coursePlanService.findByCourse(course));
+            }
         }
         model.addAttribute("searchedCoursePlans",coursePlansNew);
-        System.out.println(coursePlans.get(0));
         return "searched";
     }
     @GetMapping("/seeCoursePlan/{user_id}/{course_id}")
     public String seeCoursePlan(@PathVariable("course_id") long course_id,@PathVariable("user_id") long user_id,Model model){
-        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
-        model.addAttribute("courseplans",coursePlans);
         Account account=accountService.findByID(user_id);
-        model.addAttribute("user",account);
         CoursePlan coursePlan=coursePlanRepository.getReferenceById(course_id);
-        model.addAttribute("courseplan",coursePlan);
-        if (account instanceof Teacher) {
-            model.addAttribute("booleanVar",false);
+        if (account instanceof Teacher){
+        List<CoursePlan> coursePlans=coursePlanRepository.findCoursePlansByCreator((Teacher) account);
+        if(coursePlans.contains(coursePlan)) {
             return "teacherCourseForm";
         }
-        else
-        {
-            boolean booleanVar=coursePlans.contains(coursePlan);
+        }
+
+        model.addAttribute("user",account);
+        model.addAttribute("courseplan",coursePlan);
+        if (coursePlan.getParticipants().contains(account)) {
+            model.addAttribute("booleanVar",true);
+            return "courseform";
+        }
+        else{model.addAttribute("booleanVar",false);}
+
+
+            List<CoursePlan> coursePlans=account.getAttendedCoursePlans();
             List<Integer> examPlan = new ArrayList<>();
             for (int i = 0; i < coursePlan.getExams().size(); i++) {
                 if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account) == null) {
@@ -142,27 +146,12 @@ public class CourseController {
                 }
                 examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
             }
-            boolean flag = false;
-            for (CoursePlan plan : coursePlans) {
-                if (plan == coursePlan) {
-                    model.addAttribute("booleanVar", true);
-                    flag = true;
-                }
-            }
-            if (!flag) model.addAttribute("booleanVar",false);
 
-//            boolean flag = false;
-//            for (int j=0; j<coursePlans.size(); j++) {
-//                if (coursePlans.get(j)==coursePlan) {
-//                    model.addAttribute("booleanVar", booleanVar);
-//                    flag =true;
-//                }
-//            }
-//            if (!flag) model.addAttribute("booleanVar",false);
-            model.addAttribute("booleanVar",booleanVar);
+
+
             model.addAttribute("examPlans", examPlan);
             return "courseform";
-        }
+
 
     }
 
