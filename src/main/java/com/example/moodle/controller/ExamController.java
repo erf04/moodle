@@ -84,6 +84,7 @@ public class ExamController {
         List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
         model.addAttribute("user",account);
         model.addAttribute("courseplans",coursePlans);
+        model.addAttribute("courseplan",exam.getCoursePlan());
         return "ExamResult";
     }
 
@@ -203,7 +204,9 @@ public class ExamController {
 
         Account account=accountService.findByID(user_id);
         Exam exam=examService.findExamById(exam_id);
-        model.addAttribute("user",account);model.addAttribute("courseplan",exam.getCoursePlan());
+        model.addAttribute("user",account);
+        model.addAttribute("courseplan",exam.getCoursePlan());
+        model.addAttribute("examScores",exam.getCoursePlan().getExams());
         model.addAttribute("courseplans",accountService.findCoursePlansByAccountId(user_id));
         if (account instanceof Teacher){
 //            List<ExamPlan> examPlans=examPlanRepository.findAllByExam(exam);
