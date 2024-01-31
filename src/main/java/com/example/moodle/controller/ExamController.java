@@ -85,7 +85,7 @@ public class ExamController {
         model.addAttribute("user",account);
         model.addAttribute("courseplans",coursePlans);
         model.addAttribute("courseplan",exam.getCoursePlan());
-        return "ExamResult";
+        return "userexamresult";
     }
 
 
@@ -121,6 +121,19 @@ public class ExamController {
         model.addAttribute("courseplans",coursePlanss);
         model.addAttribute("user",user);
         return "make-exam";
+    }
+
+    @GetMapping("show-questionform/{exam_id}")
+    public String showQuestionForm(@PathVariable("exam_id") long exam_id,Model model){
+        Question question=new Question();
+        Exam exam=examService.findExamById(exam_id);
+        model.addAttribute("coursePlan",exam.getCoursePlan());
+        model.addAttribute("question",question);
+        model.addAttribute("examId",exam.getId());
+        List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(exam.getCreator().getId());
+        model.addAttribute("courseplans",coursePlans);
+        model.addAttribute("user",exam.getCreator());
+        return "addquestion";
     }
 
     @PostMapping("add-question/{exam_id}")
