@@ -140,19 +140,22 @@ public class CourseController {
         else{model.addAttribute("booleanVar",false);}
 
 
-            List<CoursePlan> coursePlans=account.getAttendedCoursePlans();
-            List<Integer> examPlan = new ArrayList<>();
-            for (int i = 0; i < coursePlan.getExams().size(); i++) {
-                if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account) == null) {
-                    examPlan.add(-1);
-                    continue;
-                }
-                examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
+//            List<CoursePlan> coursePlans=accountService.findCoursePlansByAccountId(user_id);
+//            List<Integer> examPlan = new ArrayList<>();
+//            for (int i = 0; i < coursePlan.getExams().size(); i++) {
+//                if (examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account) == null) {
+//                    examPlan.add(-1);
+//                    continue;
+//                }
+//                examPlan.add((examPlanRepository.findExamPlanByExamAndAccount(coursePlan.getExams().get(i), account)).getScore());
+//            }
+            List<ExamPlan> examPlans=new ArrayList<>();
+            for (Exam exam:coursePlan.getExams()){
+                examPlans.add(examPlanRepository.findExamPlanByExamAndAccount(exam,account));
             }
+            System.out.println(examPlans.size());
 
-
-
-            model.addAttribute("examPlans", examPlan);
+            model.addAttribute("examPlans", examPlans);
             return "courseform";
 
 

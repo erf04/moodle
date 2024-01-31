@@ -67,8 +67,7 @@
         <h1 style="font-weight: bolder">Results</h1>
         <ul class="list-group" th:each="examplan : ${examPlans}">
             <li class="list-group-item active" >
-                <p th:if="${examplan}== -1 ">Not participated!</p>
-                <p th:unless="true" th:text="${examplan}"></p>
+                <p th:text="${examplan.getScore()}"></p>
                 <p>score</p>
             </li>
         </ul>
